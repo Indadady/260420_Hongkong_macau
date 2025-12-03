@@ -34,9 +34,9 @@
         .font-serif {
             font-family: 'Noto Serif KR', serif;
         }
-        /* 홍콩 야경 배경 (Victoria Harbour) */
+        /* 홍콩 야경 배경 (Victoria Harbour) - 고화질 URL 대체 */
         .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1506318137071-a8bcbf675b27?q=80&w=2070&auto=format&fit=crop');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1558507856-11f26792348c?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -128,6 +128,10 @@
             font-size: 20px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
             transition: all 0.3s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .play-button::after {
             content: '';
@@ -139,7 +143,7 @@
             margin-left: 4px;
         }
         .video-thumbnail:hover .play-button {
-            transform: scale(1.1);
+            transform: translate(-50%, -50%) scale(1.1);
             background-color: #ff0000;
         }
 
@@ -276,27 +280,28 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="spot-card rounded-xl overflow-hidden lg:col-span-2" onclick="openModal('star_avenue')" data-aos="fade-up">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 홍콩관광청 영상</div>
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 홍콩관광청 공식영상</div>
                     <div class="flex flex-col md:flex-row h-full">
                         <div class="md:w-1/2 relative h-64 md:h-auto">
-                            <!-- Fallback error handler added -->
-                            <img src="https://images.unsplash.com/photo-1517456215162-4d94380eb92f?q=80&w=2069&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/800x600?text=Hong+Kong+View'" alt="Avenue of Stars" class="w-full h-full object-cover">
+                            <!-- 스타의 거리 이소룡상 -->
+                            <img src="https://viaggiatore.net/wp-content/uploads/2019/01/Statue-of-Bruce-Lee-at-Avenue-of-Stars-n-Hong-Kong-.jpg" onerror="this.src='https://via.placeholder.com/800x600?text=Avenue+of+Stars'" alt="Avenue of Stars" class="w-full h-full object-cover">
                         </div>
                         <div class="md:w-1/2 p-8 flex flex-col justify-center">
                             <h3 class="text-2xl font-bold mb-3">스타의 거리 & 빅토리아 항구</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-4">홍콩의 스카이라인을 가장 아름답게 감상할 수 있는 해안 산책로입니다. 이소룡 동상과 홍콩 영화 스타들의 핸드프린팅을 찾아보며 빅토리아 항구의 낭만을 만끽할 수 있습니다.</p>
-                            <div class="bg-blue-50 p-4 rounded-lg"><span class="font-bold text-blue-700 text-sm">✨ Check Point</span><p class="text-xs text-gray-600">야경 시간에 가면 심포니 오브 라이트쇼까지 한 번에 감상 가능</p></div>
+                            <div class="bg-blue-50 p-4 rounded-lg"><span class="font-bold text-blue-700 text-sm">✨ View Point</span><p class="text-xs text-gray-600">빅토리아 항구의 파노라마 야경과 심포니 오브 라이트를 한눈에!</p></div>
                         </div>
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden" onclick="openModal('heritage1881')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 보기</div>
+                    <div class="touch-hint bg-purple-600/80"><i class="fas fa-vr-cardboard"></i> 360° VR</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/1881_Heritage_Main_Building_Front_View_201406.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=1881+Heritage'" alt="1881 Heritage" class="w-full h-full object-cover">
+                        <!-- 1881 이미지 -->
+                        <img src="https://i.ytimg.com/vi/UV9G66CM1rE/maxresdefault.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=1881+Heritage'" alt="1881 Heritage" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">1881 헤리티지</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3">옛 해군경찰본부를 리모델링한 고풍스러운 쇼핑 & 문화 공간. 밤에는 조명 덕분에 웨딩촬영지처럼 아름답습니다.</p>
+                        <p class="text-gray-600 text-sm line-clamp-3">옛 해군경찰본부를 리모델링한 고풍스러운 쇼핑 & 문화 공간. 빅토리아풍 건축물이 돋보이는 야경 명소.</p>
                     </div>
                 </div>
             </div>
@@ -316,40 +321,44 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('west_kowloon')" data-aos="fade-up">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 신규 명소</div>
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 공식 소개</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/M_Plus_Museum_and_Art_Park_2022.jpg/800px-M_Plus_Museum_and_Art_Park_2022.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=West+Kowloon'" alt="West Kowloon" class="w-full h-full object-cover">
+                        <!-- 서구룡 이미지 -->
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.6c1Q3jcNVlOlv2JSuDs1DwHaEE?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=West+Kowloon'" alt="West Kowloon" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">서구룡 문화지구</h3>
-                        <p class="text-gray-600 text-sm mb-4">홍콩의 새로운 예술 허브. M+ 박물관과 아트 파빌리온이 있는 녹지 공간에서 탁 트인 하버뷰를 즐겨보세요.</p>
+                        <p class="text-gray-600 text-sm mb-4">홍콩의 새로운 예술 허브. M+ 박물관과 탁 트인 하버뷰가 어우러진 최고의 산책 코스.</p>
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('soho')" data-aos="fade-up" data-aos-delay="50">
                     <div class="touch-hint"><i class="fas fa-images"></i> 핫플레이스</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1542663806-382c40c31327?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/400x300?text=Soho+Hong+Kong'" alt="Soho" class="w-full h-full object-cover">
+                        <!-- 소호 이미지 -->
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.al81Ubuu2yn3kPRu6k0rkQHaE7?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Soho+Hong+Kong'" alt="Soho" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">소호 & 미드레벨</h3>
-                        <p class="text-gray-600 text-sm mb-4">영화 '중경삼림'의 배경이 된 세계 최장 옥외 에스컬레이터와 이국적인 소호 거리 탐방.</p>
+                        <p class="text-gray-600 text-sm mb-4">세계 최장 옥외 에스컬레이터를 타고 즐기는 이국적인 펍과 거리의 낭만.</p>
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('peak')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 홍콩 영상</div>
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 꿀팁 영상</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1558273641-7996c56b668d?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/400x300?text=Victoria+Peak'" alt="The Peak" class="w-full h-full object-cover">
+                        <!-- 피크트램 이미지 -->
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.1cyAgN1WjKMxzQ7sy8v0fgHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Victoria+Peak'" alt="The Peak" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">빅토리아 산정 (피크트램)</h3>
-                        <p class="text-gray-600 text-sm mb-4">45도 급경사를 오르는 피크트램을 타고 홍콩의 100만 불짜리 전경을 발아래 두는 짜릿한 경험.</p>
-                        <div class="mt-4 bg-green-50 p-3 rounded-lg text-xs text-gray-600"><strong>✨ 포함:</strong> 피크트램 편도</div>
+                        <p class="text-gray-600 text-sm mb-4">45도 급경사를 오르는 피크트램. 정상에서 내려다보는 홍콩의 스카이라인은 압권입니다.</p>
+                        <div class="mt-4 bg-green-50 p-3 rounded-lg text-xs text-gray-600"><strong>✨ 포함:</strong> 피크트램 편도 탑승권</div>
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm lg:col-span-3" onclick="openModal('hk_night')" data-aos="fade-up" data-aos-delay="150">
                     <div class="flex flex-col md:flex-row h-full">
                         <div class="md:w-1/3 relative h-64 md:h-auto">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/HK_Mongkok_Nathan_Road_Night_2016.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Night+Tour'" alt="Mongkok" class="w-full h-full object-cover">
+                            <!-- 홍콩 야경 이미지 교체 -->
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.vzhMpccQf8EH2XHBx9G0EgHaFj?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Night+Tour'" alt="Mongkok" class="w-full h-full object-cover">
                         </div>
                         <div class="md:w-2/3 p-6 flex flex-col justify-center">
                             <h3 class="text-2xl font-bold mb-3">홍콩 나이트 투어 (스타페리+2층버스+몽콕)</h3>
@@ -374,8 +383,9 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="spot-card rounded-xl overflow-hidden" onclick="openModal('wongtaisin')" data-aos="fade-up">
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 소원 성취</div>
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Wong_Tai_Sin_Temple_2016.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Wong+Tai+Sin'" alt="Wong Tai Sin" class="w-full h-full object-cover">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP._R7m9FwI6mrP_a0rVEiQLAHaD4?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Wong+Tai+Sin'" alt="Wong Tai Sin" class="w-full h-full object-cover">
                     </div>
                     <div class="p-4 spot-content">
                         <h3 class="text-lg font-bold mb-1">웡타이신 사원</h3>
@@ -383,8 +393,10 @@
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden" onclick="openModal('bridge')" data-aos="fade-up" data-aos-delay="50">
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 세계 최장 대교</div>
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/HZMB_Hong_Kong_Link_Road_near_Scenic_Hill_201810.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=HZMB+Bridge'" alt="HZMB" class="w-full h-full object-cover">
+                        <!-- 강주아오 대교 이미지 교체 -->
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.KTxK5_FjgxqYr8aIDm-1sQHaDP?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=HZMB+Bridge'" alt="HZMB" class="w-full h-full object-cover">
                     </div>
                     <div class="p-4 spot-content">
                         <h3 class="text-lg font-bold mb-1">강주아오 대교</h3>
@@ -394,7 +406,7 @@
                 <div class="spot-card rounded-xl overflow-hidden lg:col-span-2" onclick="openModal('st_paul')" data-aos="fade-up" data-aos-delay="100">
                     <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 마카오 영상</div>
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544158467-3475b7bc38b6?q=80&w=1974&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/400x300?text=St+Paul+Ruins'" alt="St. Paul" class="w-full h-full object-cover">
+                        <img src="https://www.chinatoptrip.com/wp-content/uploads/2018/11/ruins-of-st-pauls-macau-china-1.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=St+Paul+Ruins'" alt="St. Paul" class="w-full h-full object-cover">
                     </div>
                     <div class="p-4 spot-content">
                         <h3 class="text-lg font-bold mb-1">성 바오로 성당 & 세나도 광장</h3>
@@ -404,7 +416,7 @@
                 <div class="spot-card rounded-xl overflow-hidden lg:col-span-4" onclick="openModal('cotai_night')" data-aos="fade-up" data-aos-delay="150">
                     <div class="flex flex-col md:flex-row h-full bg-black text-white">
                         <div class="md:w-1/2 relative h-64 md:h-auto">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/The_Parisian_Macao_201609.jpg" onerror="this.src='https://via.placeholder.com/800x600?text=Cotai+Night'" alt="Parisian" class="w-full h-full object-cover opacity-90">
+                            <img src="https://assets.sandsresortsmacao.cn/content/dam/parisianmacao/kentest/eiffel-tower/eiffel-tower-grand-illumination-show_600x420.gif" onerror="this.src='https://via.placeholder.com/800x600?text=Cotai+Night'" alt="Parisian" class="w-full h-full object-cover opacity-90">
                             <div class="absolute bottom-4 left-4 font-bold text-xl text-shadow">COTAI NIGHT VIEW</div>
                         </div>
                         <div class="md:w-1/2 p-8 flex flex-col justify-center">
@@ -436,7 +448,7 @@
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('coloane')" data-aos="fade-up">
                     <div class="touch-hint"><i class="fas fa-images"></i> 에그타르트</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://macaulifestyle.com/wp-content/uploads/2018/06/Coloane-Village-St-Francis-Xavier-Chapel.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Coloane'" alt="Coloane" class="w-full h-full object-cover">
+                        <img src="https://macaulifestyle.com/wp-content/uploads/2020/02/St-Francis-Xavier-Church-Wide-Exterior-Coloane-Village-Macau-Lifestyle.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Coloane'" alt="Coloane" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">콜로안 빌리지</h3>
@@ -446,7 +458,7 @@
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('taipa')" data-aos="fade-up" data-aos-delay="50">
                     <div class="touch-hint"><i class="fas fa-images"></i> 민트색 주택</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Taipa_Houses_Museum_2015.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Taipa'" alt="Taipa Houses" class="w-full h-full object-cover">
+                        <img src="https://www.taipavillagemacau.com/wp-content/uploads/2016/03/Taipa_Houses_Museum.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Taipa'" alt="Taipa Houses" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">타이파 빌리지 & 주택박물관</h3>
@@ -454,9 +466,10 @@
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('galaxy')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 마카오 영상</div>
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 쇼 하이라이트</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Galaxy_Macau_Diamond_Lobby_201404.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Galaxy'" alt="Galaxy" class="w-full h-full object-cover">
+                        <!-- 갤럭시 이미지 교체 -->
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.4wohTzAJ2HEHUJIiUeD4ngHaEK?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Galaxy'" alt="Galaxy" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">갤럭시 다이아몬드 쇼</h3>
@@ -464,9 +477,10 @@
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('macau_tower')" data-aos="fade-up" data-aos-delay="150">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 보기</div>
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 액티비티 영상</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/400x300?text=Macau+Tower'" alt="Macau Tower" class="w-full h-full object-cover">
+                        <!-- 마카오 타워 이미지 교체 -->
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.tDdC5wAFCAUdJhN9HIsEyAHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Macau+Tower'" alt="Macau Tower" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">마카오 타워</h3>
@@ -474,9 +488,10 @@
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('venetian')" data-aos="fade-up" data-aos-delay="150">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 보기</div>
+                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 베네시안 영상</div>
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1600613277341-c1f0165997d9?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/400x300?text=Night+Tour'" alt="Night" class="w-full h-full object-cover">
+                        <!-- 베네시안 이미지 교체 -->
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.XEaMuxKssIxQ8cplE675gQHaEO?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Night+Tour'" alt="Night" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">베네시안 & 윈 분수쇼</h3>
@@ -485,7 +500,8 @@
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('ama')" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/A-Ma_Temple_Gate_2008.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=A-Ma+Temple'" alt="A-Ma Temple" class="w-full h-full object-cover">
+                        <!-- 아마사원 이미지 교체 -->
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.lO8Y5aSapF1OoRFzYqn5KwHaFE?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=A-Ma+Temple'" alt="A-Ma Temple" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 spot-content">
                         <h3 class="text-xl font-bold mb-2">아마 사원 (DAY 5)</h3>
@@ -509,24 +525,24 @@
                 <div class="spot-card rounded-xl overflow-hidden shadow-lg border border-gray-100 flex flex-col md:flex-row" onclick="openModal('hotel_macau')" data-aos="fade-up">
                     <div class="touch-hint"><i class="fas fa-images"></i> 호텔 전경</div>
                     <div class="md:w-1/2 h-64 md:h-auto relative">
-                        <img src="https://digital.ihg.com/is/image/ihg/crowne-plaza-macau-5867963390-2x1?wid=2880&hei=1440&fmt=jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Crowne+Plaza'" alt="Crowne Plaza Macau" class="w-full h-full object-cover">
+                        <img src="https://digital.ihg.com/is/image/ihg/crowne-plaza-macau-4892329475-2x1" onerror="this.src='https://via.placeholder.com/400x300?text=Crowne+Plaza'" alt="Crowne Plaza Macau Room" class="w-full h-full object-cover">
                     </div>
                     <div class="md:w-1/2 p-8 flex flex-col justify-center">
                         <span class="text-sm text-gray-400 mb-1">MACAU</span>
                         <h3 class="text-2xl font-bold mb-2">크라운프라자 마카오</h3>
                         <p class="text-red-500 font-bold text-sm mb-4">★★★★★ (5성급)</p>
-                        <p class="text-gray-600 text-sm mb-4">바다를 향해 열린 해안가(펄강 어귀) 쪽에 위치한 5성급 호텔. 대부분 객실에서 남중국해/바다 전망을 볼 수 있는 것이 장점입니다.</p>
+                        <p class="text-gray-600 text-sm mb-4">홍콩–주하이–마카오 대교 인근. 남중국해를 조망하는 통유리창 객실과 실내 수영장, MICE 시설을 갖춘 프리미엄 호텔입니다.</p>
                     </div>
                 </div>
                 <div class="spot-card rounded-xl overflow-hidden shadow-lg border border-gray-100 flex flex-col md:flex-row" onclick="openModal('hotel_hk')" data-aos="fade-up" data-aos-delay="100">
                     <div class="touch-hint"><i class="fas fa-images"></i> 상세 사진</div>
                     <div class="md:w-1/2 h-64 md:h-auto relative">
-                        <img src="https://media-cdn.tripadvisor.com/media/photo-s/1c/d2/36/45/alva-hotel-by-royal.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Alva+Hotel'" alt="Alva Hotel" class="w-full h-full object-cover">
+                        <img src="https://www.alva.com.hk/wp-content/uploads/deluxe-room.webp" onerror="this.src='https://via.placeholder.com/400x300?text=Alva+Hotel'" alt="Alva Hotel Room" class="w-full h-full object-cover">
                     </div>
                     <div class="md:w-1/2 p-8 flex flex-col justify-center">
                         <span class="text-sm text-gray-400 mb-1">HONG KONG</span>
                         <h3 class="text-2xl font-bold mb-2">알바 바이 로얄 (ALVA)</h3>
-                        <p class="text-gray-600 text-sm mb-4">샤틴 싱문강 변에 위치한 5성급 호텔로, 모던한 인테리어와 큰 창, 스마트 객실 시스템을 갖춘 것이 특징입니다.</p>
+                        <p class="text-gray-600 text-sm mb-4">싱문 강변의 리버사이드 호텔. iPad로 제어하는 스마트 객실 시스템과 루프탑 인피니티 풀에서 여유로운 휴식을 선사합니다.</p>
                     </div>
                 </div>
             </div>
@@ -538,7 +554,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="food-card group aspect-[4/5]" onclick="openModal('food_dimsum')" data-aos="fade-up" data-aos-delay="200">
                     <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/300x400?text=Dimsum'" alt="Dim Sum" class="w-full h-full object-cover">
+                    <!-- 딤섬 이미지 교체 -->
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.YCJRYSrjyohhulbV6zvNRQHaEc?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Dimsum'" alt="Dim Sum Steamer" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
                         <h4 class="text-white text-xl font-bold">세레나데 딤섬</h4>
                         <p class="text-gray-300 text-sm mt-2">홍콩 미식의 상징</p>
@@ -546,7 +563,8 @@
                 </div>
                 <div class="food-card group aspect-[4/5]" onclick="openModal('food_macanese')" data-aos="fade-up" data-aos-delay="300">
                     <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Galinha_%C3%A0_Portuguesa.jpg" onerror="this.src='https://via.placeholder.com/300x400?text=Macanese'" alt="Macanese" class="w-full h-full object-cover">
+                    <!-- 매캐니즈 이미지 교체 -->
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.dQ0VUQTtv3ZhPOSLeuo_JAHaE7?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Macanese'" alt="Macanese Egg Tart" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
                         <h4 class="text-white text-xl font-bold">매캐니즈 요리</h4>
                         <p class="text-gray-300 text-sm mt-2">포르투갈+광동 퓨전</p>
@@ -554,7 +572,8 @@
                 </div>
                 <div class="food-card group aspect-[4/5]" onclick="openModal('food_hotpot')" data-aos="fade-up" data-aos-delay="400">
                     <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <img src="https://images.unsplash.com/photo-1549488344-c7079f856fdd?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://via.placeholder.com/300x400?text=Hotpot'" alt="Shabu" class="w-full h-full object-cover">
+                    <!-- 훠궈 이미지 교체 -->
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.OY5dz4bnHTmvog6w_nbL4gHaFj?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Hotpot'" alt="Shabu Hotpot" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
                         <h4 class="text-white text-xl font-bold">현지식 샤브샤브</h4>
                         <p class="text-gray-300 text-sm mt-2">든든한 보양식</p>
@@ -562,7 +581,8 @@
                 </div>
                 <div class="food-card group aspect-[4/5]" onclick="openModal('food_noodle')" data-aos="fade-up" data-aos-delay="500">
                     <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Oyster_vermicelli_20130922.jpg" onerror="this.src='https://via.placeholder.com/300x400?text=Noodle'" alt="Noodle" class="w-full h-full object-cover">
+                    <!-- 굴국수 이미지 교체 -->
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.2oYAwjot7D_StWVOOzbLjwHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Noodle'" alt="Noodle Lift" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
                         <h4 class="text-white text-xl font-bold">굴국수 & 윙</h4>
                         <p class="text-gray-300 text-sm mt-2">현지 별미</p>
@@ -619,160 +639,153 @@
 
         // Data for Modals with OFFICIAL TOURISM BOARD VIDEOS
         // 홍콩/마카오 관광청 공식 영상 및 4K 고화질 영상 큐레이션
-        // 통합 영상 ID: 홍콩(qK45oCw--4I), 마카오(dXP4DUOjp-w)
+        // Updated with ALL images from user
         const modalData = {
             'star_avenue': {
                 title: '스타의 거리 (Avenue of Stars)',
-                img: 'https://images.unsplash.com/photo-1517456215162-4d94380eb92f?q=80&w=2069&auto=format&fit=crop', 
-                desc: '홍콩의 스카이라인을 가장 아름답게 감상할 수 있는 해안 산책로입니다. 이소룡 동상과 홍콩 영화 스타들의 핸드프린팅을 찾아보며 빅토리아 항구의 낭만을 만끽할 수 있는 명소입니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                img: 'https://viaggiatore.net/wp-content/uploads/2019/01/Statue-of-Bruce-Lee-at-Avenue-of-Stars-n-Hong-Kong-.jpg', 
+                desc: '홍콩의 스카이라인을 가장 아름답게 감상할 수 있는 해안 산책로입니다. 이소룡 동상과 홍콩 영화 스타들의 핸드프린팅을 찾아보며 빅토리아 항구의 낭만을 만끽할 수 있는 명소입니다.\n\n[추천 영상: 홍콩관광청 공식 - 360 Hong Kong Moments]',
+                videoId: 'Qf5Uu_dwqos', 
+                thumb: 'https://img.youtube.com/vi/Qf5Uu_dwqos/hqdefault.jpg'
             },
             'heritage1881': {
                 title: '1881 헤리티지 (1881 Heritage)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/1881_Heritage_Main_Building_Front_View_201406.jpg', 
-                desc: '1880년대부터 홍콩 해경 본부로 사용되던 빅토리아 양식의 건물을 리모델링한 쇼핑 및 문화 복합 공간입니다. 고풍스러운 건축물과 명품 매장이 어우러져 낮과 밤 모두 우아한 분위기를 자아냅니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                img: 'https://i.ytimg.com/vi/UV9G66CM1rE/maxresdefault.jpg', 
+                desc: '1880년대부터 홍콩 해경 본부로 사용되던 빅토리아 양식의 건물을 리모델링한 쇼핑 및 문화 복합 공간입니다. 고풍스러운 건축물과 명품 매장이 어우러져 낮과 밤 모두 우아한 분위기를 자아냅니다.\n\n[추천 영상: 360° VR 체험]',
+                videoId: 'bRJ0W2qXctk', 
+                thumb: 'https://img.youtube.com/vi/bRJ0W2qXctk/hqdefault.jpg'
             },
             'west_kowloon': {
                 title: '서구룡 문화지구 (West Kowloon)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/M_Plus_Museum_and_Art_Park_2022.jpg/800px-M_Plus_Museum_and_Art_Park_2022.jpg',
-                desc: '홍콩의 새로운 문화 예술 중심지로, 빅토리아 하버를 배경으로 펼쳐진 녹지 공간입니다. 현대적인 건축미를 자랑하는 M+ 뮤지엄의 외관과 아트 파빌리온은 ‘인스타그래머블’한 사진 명소로 유명합니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                img: 'https://tse3.mm.bing.net/th/id/OIP.6c1Q3jcNVlOlv2JSuDs1DwHaEE?w=474&h=474&c=7&p=0',
+                desc: '홍콩의 새로운 문화 예술 중심지로, 빅토리아 하버를 배경으로 펼쳐진 녹지 공간입니다. 현대적인 건축미를 자랑하는 M+ 뮤지엄의 외관과 아트 파빌리온은 ‘인스타그래머블’한 사진 명소로 유명합니다.\n\n[추천 영상: 서구룡 문화지구 공식 소개]',
+                videoId: 'V_rwF8MR1XE', 
+                thumb: 'https://img.youtube.com/vi/V_rwF8MR1XE/hqdefault.jpg'
             },
             'soho': {
                 title: '소호 거리 & 미드레벨 에스컬레이터',
-                img: 'https://images.unsplash.com/photo-1542663806-382c40c31327?q=80&w=2070&auto=format&fit=crop',
+                img: 'https://tse4.mm.bing.net/th/id/OIP.al81Ubuu2yn3kPRu6k0rkQHaE7?w=474&h=474&c=7&p=0',
                 desc: '영화 "중경삼림"의 배경이 된 세계에서 가장 긴 야외 에스컬레이터입니다. 앤티크 숍과 트렌디한 바, 벽화가 어우러진 이국적인 거리를 편안하게 이동하며 감상할 수 있습니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                videoId: 'Qf5Uu_dwqos', // Using General HK skyline video as fallback/context
+                thumb: 'https://img.youtube.com/vi/Qf5Uu_dwqos/hqdefault.jpg'
             },
             'peak': {
                 title: '빅토리아 피크 (피크트램)',
-                img: 'https://images.unsplash.com/photo-1558273641-7996c56b668d?q=80&w=2070&auto=format&fit=crop', 
-                desc: '홍콩 여행의 하이라이트로 꼽히는 최고의 전망대입니다. 45도가 넘는 급경사를 오르는 피크트램을 타고 정상에 오르면, 숲과 고층 빌딩, 바다가 어우러진 홍콩의 100만 불짜리 전경이 발아래 펼쳐집니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                img: 'https://tse1.mm.bing.net/th/id/OIP.1cyAgN1WjKMxzQ7sy8v0fgHaE8?w=474&h=474&c=7&p=0', 
+                desc: '홍콩 여행의 하이라이트로 꼽히는 최고의 전망대입니다. 45도가 넘는 급경사를 오르는 피크트램을 타고 정상에 오르면, 숲과 고층 빌딩, 바다가 어우러진 홍콩의 100만 불짜리 전경이 발아래 펼쳐집니다.\n\n[추천 영상: 3 Ways to Enjoy The Peak]',
+                videoId: 'wn-3rVQFOak', 
+                thumb: 'https://img.youtube.com/vi/wn-3rVQFOak/hqdefault.jpg'
             },
             'hk_night': {
                 title: '홍콩 나이트 투어',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/9/91/HK_Mongkok_Nathan_Road_Night_2016.jpg', 
+                img: 'https://tse3.mm.bing.net/th/id/OIP.vzhMpccQf8EH2XHBx9G0EgHaFj?w=474&h=474&c=7&p=0', 
                 desc: '홍콩의 밤을 즐기는 완벽한 방법입니다. 유서 깊은 교통수단인 스타페리와 오픈탑 2층 버스를 타고 화려한 도시의 불빛을 가로지른 뒤, 활기 넘치는 몽콕 야시장에서 현지의 생동감을 체험합니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                videoId: 'Qf5Uu_dwqos', 
+                thumb: 'https://img.youtube.com/vi/Qf5Uu_dwqos/hqdefault.jpg'
             },
             'wongtaisin': {
                 title: '웡타이신 사원 (Wong Tai Sin Temple)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Wong_Tai_Sin_Temple_2016.jpg',
-                desc: '"모든 소원을 들어준다"는 전설을 가진 홍콩 최대의 도교 사원입니다. 화려한 색채의 건축물과 향 내음 가득한 경건한 분위기 속에서 홍콩 사람들의 신앙 문화를 엿볼 수 있습니다.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
+                img: 'https://tse1.mm.bing.net/th/id/OIP._R7m9FwI6mrP_a0rVEiQLAHaD4?w=474&h=474&c=7&p=0',
+                desc: '"모든 소원을 들어준다"는 전설을 가진 홍콩 최대의 도교 사원입니다. 화려한 색채의 건축물과 향 내음 가득한 경건한 분위기 속에서 홍콩 사람들의 신앙 문화를 엿볼 수 있습니다.\n\n[추천 영상: Hong Kong\'s Hottest Religious Site]',
+                videoId: '1_OrtMyyw8c', 
+                thumb: 'https://img.youtube.com/vi/1_OrtMyyw8c/hqdefault.jpg'
             },
             'bridge': {
                 title: '강주아오 대교 (HZMB)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/HZMB_Hong_Kong_Link_Road_near_Scenic_Hill_201810.jpg',
-                desc: '홍콩과 마카오, 주하이를 잇는 세계 최장 해상 대교(55km)입니다. 바다 위를 시원하게 달리는 셔틀버스를 타고 국경을 넘으며 거대한 토목 공학의 경이로움을 체험합니다.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
+                img: 'https://tse2.mm.bing.net/th/id/OIP.KTxK5_FjgxqYr8aIDm-1sQHaDP?w=474&h=474&c=7&p=0',
+                desc: '세계 최장 약 55km 규모의 해상 대교·해저터널 복합 구간으로, 홍콩–주하이–마카오를 일직선으로 잇는 웅장한 프로젝트입니다.\n3개의 장대교, 인공섬, 6.7km 해저터널로 구성되어 있으며, 차량으로 약 30~40분 만에 바다를 횡단하며 "광둥–홍콩–마카오 대만주권 시대"의 상징적인 풍경을 감상할 수 있습니다.\n\n[추천 영상: Crossing the World’s Longest Sea Bridge]',
+                videoId: 'IOrhetZlAic', 
+                thumb: 'https://img.youtube.com/vi/IOrhetZlAic/hqdefault.jpg'
             },
             'st_paul': {
-                title: '성 바울 성당 유적 & 세나도 광장',
-                img: 'https://images.unsplash.com/photo-1544158467-3475b7bc38b6?q=80&w=1974&auto=format&fit=crop',
-                desc: '유네스코 세계문화유산으로 지정된 마카오 역사의 중심지입니다. 화재로 앞면만 남은 성 바울 성당의 신비로운 모습과 포르투갈 풍 물결무늬 타일 바닥이 인상적인 세나도 광장은 유럽에 온 듯한 착각을 불러일으킵니다.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
-            },
-            'st_dominic': {
-                title: '성 도미니크 성당 & 육포 거리',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/St._Dominic%27s_Church%2C_Macau_01.jpg',
-                desc: '노란색 외벽과 초록색 창문이 아름다운 바로크 양식의 성당을 둘러보고, 이어지는 골목에서 갓 구운 아몬드 쿠키와 육포를 시식하며 마카오의 맛과 멋을 즐길 수 있습니다.',
+                title: '성 바오로 성당 유적 & 세나도 광장',
+                img: 'https://www.chinatoptrip.com/wp-content/uploads/2018/11/ruins-of-st-pauls-macau-china-1.jpg',
+                desc: '원래는 17세기 예수회가 세운 ‘마테 데이 교회’와 성 바오로 대학 건물로, 1835년 화재 이후 지금의 석조 파사드와 긴 계단만 남아 있는 유적입니다. 동양적 문양과 서양식 조각이 공존해 ‘동서 문화 융합’의 상징으로 불립니다.\n이어지는 세나도 광장은 물결무늬 흑백 자갈 포장이 유명한 마카오의 중심 광장으로, 유럽풍 건물과 어우러진 이국적인 풍경을 자랑합니다.\n\n[추천 영상: Explore On Your Own in Macao – St. Paul’s]',
                 videoId: 'dXP4DUOjp-w', 
                 thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
             },
             'cotai_night': {
-                title: 'MGM 실내 정원 & 코타이 야경',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/The_Parisian_Macao_201609.jpg',
-                desc: '거대한 수족관과 나비 장식으로 꾸며진 MGM의 실내 정원을 감상하고, 밤이 되면 "동양의 라스베이거스" 코타이 스트립으로 이동합니다. 실물 크기의 1/2로 재현된 에펠탑과 빅벤을 배경으로 화려한 야경을 만납니다.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
+                title: '코타이 야경 (런더러 & 파리지앵)',
+                img: 'https://assets.sandsresortsmacao.cn/content/dam/parisianmacao/kentest/eiffel-tower/eiffel-tower-grand-illumination-show_600x420.gif',
+                desc: '‘동양의 라스베이거스’라 불리는 코타이 스트립의 화려한 야경을 감상합니다. \n실제 에펠탑의 약 1/2 규모인 파리지앵 마카오의 에펠탑 조명 쇼와, 런던 국회의사당 및 빅벤을 모티브로 한 런더러 마카오의 웅장한 외관이 어우러져 황홀한 포토 스팟을 제공합니다.\n\n[추천 영상: Cotai Strip Night Walk]',
+                videoId: '7UO3tq_Cp1Q', 
+                thumb: 'https://img.youtube.com/vi/7UO3tq_Cp1Q/hqdefault.jpg'
             },
             'coloane': {
                 title: '콜로안 빌리지 (성 자비에르 성당)',
-                img: 'https://macaulifestyle.com/wp-content/uploads/2018/06/Coloane-Village-St-Francis-Xavier-Chapel.jpg',
-                desc: '화려한 카지노와는 정반대되는 소박하고 평화로운 어촌 마을입니다. 드라마 "궁"의 촬영지로 유명한 노란색 성 자비에르 성당 앞에서 인생 사진을 남기고, 원조 에그타르트의 달콤함을 맛볼 수 있습니다.',
+                img: 'https://macaulifestyle.com/wp-content/uploads/2020/02/St-Francis-Xavier-Church-Wide-Exterior-Coloane-Village-Macau-Lifestyle.jpg',
+                desc: '마카오 남단의 조용한 어촌 마을로, 화려한 도심과는 다른 로컬 감성을 느낄 수 있습니다. 중심 광장의 성 자비에르 성당과 파스텔톤 건물들이 이국적인 분위기를 자아내며, 인근의 원조 에그타르트(로드스토우) 본점에서 달콤한 휴식을 즐길 수 있습니다.\n\n[추천 영상: Strolling around Coloane Village]',
                 videoId: 'dXP4DUOjp-w', 
                 thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
             },
             'taipa': {
                 title: '타이파 빌리지 & 주택 박물관',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Taipa_Houses_Museum_2015.jpg',
-                desc: '민트색 외벽의 포르투갈 스타일 주택들이 늘어선 동화 같은 거리입니다. 과거 마카오에 거주하던 포르투갈 관리들의 생활상을 엿볼 수 있는 박물관과 아기자기한 골목 산책이 매력적입니다.',
+                img: 'https://www.taipavillagemacau.com/wp-content/uploads/2016/03/Taipa_Houses_Museum.jpg',
+                desc: '민트색 외벽의 포르투갈 스타일 주택들이 늘어선 동화 같은 거리입니다. 1920년대 포르투갈 관리들의 관사를 복원한 주택박물관은 호수와 정원을 배경으로 아름다운 풍경을 자랑하며, 타이파 빌리지의 아기자기한 골목과 카페거리는 산책하기 좋습니다.\n\n[추천 영상: Taipa Village Walking Tour]',
                 videoId: 'dXP4DUOjp-w', 
                 thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
             },
             'galaxy': {
-                title: '갤럭시 호텔 다이아몬드 쇼',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Galaxy_Macau_Diamond_Lobby_201404.jpg',
-                desc: '갤럭시 호텔 로비에서 펼쳐지는 무료 쇼로, 거대한 분수와 함께 등장하는 초대형 다이아몬드 조형물이 화려한 조명과 음악에 맞춰 춤추는 장관을 연출합니다.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
+                title: '갤럭시 다이아몬드 쇼',
+                img: 'https://tse2.mm.bing.net/th/id/OIP.4wohTzAJ2HEHUJIiUeD4ngHaEK?w=474&h=474&c=7&p=0',
+                desc: '갤럭시 마카오 리조트 로비에서 펼쳐지는 압도적인 스케일의 무료 멀티미디어 쇼입니다. 웅장한 음악과 조명, 분수 사이에서 거대한 다이아몬드 조형물이 물 위로 솟아오르는 환상적인 퍼포먼스를 감상할 수 있습니다.\n\n[추천 영상: Galaxy Macau Diamond Show]',
+                videoId: 'b1oWL8tD0BE', 
+                thumb: 'https://img.youtube.com/vi/b1oWL8tD0BE/hqdefault.jpg'
             },
             'macau_tower': {
                 title: '마카오 타워',
-                img: 'https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=2070&auto=format&fit=crop',
-                desc: '마카오의 랜드마크로, 338m 높이에서 마카오 시내와 펄 강 델타 지역을 360도 파노라마로 조망할 수 있습니다. 맑은 날에는 홍콩 란타우 섬까지 보이는 탁 트인 시야를 자랑합니다.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
+                img: 'https://tse2.mm.bing.net/th/id/OIP.tDdC5wAFCAUdJhN9HIsEyAHaE8?w=474&h=474&c=7&p=0',
+                desc: '높이 338m의 마카오 랜드마크로, 전망대에서는 마카오 반도와 코타이 스트립을 360도 파노라마로 조망할 수 있습니다. 스릴 넘치는 스카이워크나 번지점프를 구경하는 재미도 있으며, 특히 야경 시간대에는 도시 전체의 불빛을 한눈에 담을 수 있습니다.\n\n[추천 영상: Macau Tower Observation & Adventure]',
+                videoId: 'JT9BHqJMqfY', 
+                thumb: 'https://img.youtube.com/vi/JT9BHqJMqfY/hqdefault.jpg'
             },
             'venetian': {
-                title: '윈 분수쇼 & 베네시안 카지노',
-                img: 'https://images.unsplash.com/photo-1600613277341-c1f0165997d9?q=80&w=2070&auto=format&fit=crop',
-                desc: '음악에 맞춰 춤추는 우아한 분수쇼를 감상하고, 이탈리아 베네치아를 그대로 옮겨온 듯한 베네시안 호텔의 인공 운하와 황금빛 천장 아래서 럭셔리한 밤을 마무리합니다.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
+                title: '베네시안 곤돌라 & 윈 분수쇼',
+                img: 'https://tse1.mm.bing.net/th/id/OIP.XEaMuxKssIxQ8cplE675gQHaEO?w=474&h=474&c=7&p=0',
+                desc: '이탈리아 베네치아를 그대로 옮겨온 듯한 베네시안 호텔의 인공 운하에서 낭만적인 곤돌라를 구경하고, 인근 윈 팰리스(또는 윈 마카오)의 대형 인공 호수에서 펼쳐지는 화려한 음악 분수쇼(Performance Lake)를 감상하며 마카오의 밤을 만끽합니다.\n\n[추천 영상: Venetian Gondola & Wynn Fountain]',
+                videoId: 'F6uPp6W3mK4', 
+                thumb: 'https://img.youtube.com/vi/F6uPp6W3mK4/hqdefault.jpg'
             },
             'ama': {
                 title: '아마 사원 (A-Ma Temple)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/A-Ma_Temple_Gate_2008.jpg',
-                desc: '마카오 지명의 유래가 된 가장 오래된 도교 사원입니다. 뱃사람들의 안녕을 기원하던 곳으로, 향 연기가 피어오르는 고즈넉한 분위기 속에서 마카오의 뿌리를 느낄 수 있습니다.',
+                img: 'https://tse1.mm.bing.net/th/id/OIP.lO8Y5aSapF1OoRFzYqn5KwHaFE?w=474&h=474&c=7&p=0',
+                desc: '마카오에서 가장 오래된 도교 사원으로, 바다의 여신 ‘마조’를 모시는 곳입니다. ‘마카오’라는 지명의 유래가 된 유서 깊은 곳으로, 향 연기가 피어오르는 경건한 분위기 속에서 마카오의 뿌리와 정체성을 느낄 수 있습니다.\n\n[추천 영상: A-Ma Temple World Heritage]',
                 videoId: 'dXP4DUOjp-w', 
                 thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
             },
             'hotel_hk': {
                 title: '알바 호텔 바이 로얄 (ALVA HOTEL BY ROYAL)',
-                img: 'https://media-cdn.tripadvisor.com/media/photo-s/1c/d2/36/45/alva-hotel-by-royal.jpg',
-                desc: '홍콩 샤틴(Shatin) 지역에 위치한 모던하고 세련된 5성급 호텔입니다. 2019년에 오픈하여 쾌적한 시설을 자랑하며, 싱문 강(Shing Mun River)이 내려다보이는 리버뷰와 스마트한 객실 시스템이 특징입니다.',
+                img: 'https://www.alva.com.hk/wp-content/uploads/deluxe-room.webp',
+                desc: '홍콩 샤틴 싱문강(Shing Mun River) 변에 위치한 리버사이드 라이프스타일 호텔입니다. \n\n**Key Point:**\n- **스마트 홈 시스템:** 전 객실에 비치된 iPad로 조명, 온도, TV 등을 제어하는 최첨단 경험.\n- **루프탑 인피니티 풀:** 탁 트인 시티뷰와 함께하는 여유로운 수영.\n- **위치:** 도심과 자연이 공존하는 샤틴 지역, MTR 및 셔틀로 편리한 접근성.',
                 videoId: 'qK45oCw--4I', 
                 thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
             },
             'hotel_macau': {
                 title: '크라운 플라자 마카오 (Crowne Plaza Macau)',
-                img: 'https://digital.ihg.com/is/image/ihg/crowne-plaza-macau-5867963390-2x1?wid=2880&hei=1440&fmt=jpg',
-                desc: '마카오 반도의 북쪽 해안가에 위치한 럭셔리 5성급 호텔입니다. 모든 객실에서 탁 트인 바다 전망을 즐길 수 있으며, 우아한 인테리어와 실내 수영장, 수준 높은 조식 뷔페로 여행객들의 만족도가 매우 높은 곳입니다.',
+                img: 'https://digital.ihg.com/is/image/ihg/crowne-plaza-macau-4892329475-2x1',
+                desc: '마카오 반도 북쪽 해안가, 홍콩-주하이-마카오 대교 인근에 위치한 5성급 호텔입니다.\n\n**Key Point:**\n- **파노라마 오션뷰:** 객실 통유리창을 통해 펼쳐지는 남중국해의 시원한 전망.\n- **비즈니스 & 레저:** 실내 수영장, 피트니스 센터 및 대규모 MICE 시설 완비.\n- **품격 있는 객실:** 연한 톤의 모던한 인테리어와 최신식 어메니티 제공.',
                 videoId: 'dXP4DUOjp-w', 
                 thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
             },
             'food_dimsum': {
-                title: '홍콩 딤섬 런치',
-                img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=2070&auto=format&fit=crop',
-                desc: '홍콩 미식의 꽃, 딤섬을 제대로 즐기는 코스입니다. 얇은 피 속 탱글탱글한 새우가 씹히는 "하가우", 육즙 가득한 "샤오롱바오", 달콤한 찐빵 등 대나무 찜기에 담겨 나오는 다채로운 점심 식사입니다.'
+                title: '세레나데 딤섬 (Serenade Dim Sum)',
+                img: 'https://tse2.mm.bing.net/th/id/OIP.YCJRYSrjyohhulbV6zvNRQHaEc?w=474&h=474&c=7&p=0',
+                desc: '침사추이 홍콩문화센터에 위치하여 빅토리아 하버의 절경을 감상하며 식사할 수 있는 명소입니다.\n\n**대표 메뉴:**\n- **하가우:** 얇은 피 속에 탱글한 새우가 가득한 딤섬.\n- **시우마이:** 돼지고기와 새우가 어우러진 오픈형 딤섬.\n- **차슈바오:** 달콤한 바비큐 돼지고기가 들어간 찐빵.\n대나무 찜통에서 피어오르는 따뜻한 김과 함께 광둥 미식의 진수를 경험하세요.'
             },
             'food_macanese': {
-                title: '매캐니즈 요리 (Macanese)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Galinha_%C3%A0_Portuguesa.jpg',
-                desc: '포르투갈과 중국의 식문화가 결합된 마카오만의 독특한 퓨전 요리입니다. 그릴에 구운 아프리카 치킨, 조개 찜, 볶음밥 등 동서양의 맛이 조화롭게 어우러진 이색적인 점심 식사를 즐깁니다.'
-            },
-            'food_noodle': {
-                title: '굴국수 & 닭날개 튀김',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Oyster_vermicelli_20130922.jpg',
-                desc: '현지인들도 줄 서서 먹는 마카오의 로컬 맛집 메뉴입니다. 시원하고 진한 굴 육수에 얇은 쌀국수를 말아먹는 굴국수와, 바삭하고 짭조름한 닭날개 튀김의 조합은 한국인의 입맛에도 완벽하게 맞습니다.'
+                title: '매캐니즈 요리 (Macanese Cuisine)',
+                img: 'https://tse3.mm.bing.net/th/id/OIP.dQ0VUQTtv3ZhPOSLeuo_JAHaE7?w=474&h=474&c=7&p=0',
+                desc: '포르투갈의 항해 역사와 광동의 식문화가 만나 탄생한 세계 최초의 퓨전 요리입니다. 향신료와 코코넛 밀크, 간장 소스의 조화가 일품입니다.\n\n**대표 메뉴:**\n- **아프리칸 치킨:** 매콤한 향신료와 코코넛 소스로 구운 치킨.\n- **민치(Minchi):** 다진 고기와 감자를 볶아낸 마카오 가정식.\n- **에그타르트:** 바삭한 페이스트리와 부드러운 커스터드 크림의 조화.'
             },
             'food_hotpot': {
-                title: '훠궈 (샤브샤브)',
-                img: 'https://images.unsplash.com/photo-1549488344-c7079f856fdd?q=80&w=2070&auto=format&fit=crop',
-                desc: '신선한 소고기와 각종 해산물, 야채를 뜨거운 육수에 살짝 익혀 먹는 중국식 샤브샤브입니다. 여행의 피로를 풀어주는 따뜻한 국물과 취향대로 만들어 먹는 소스가 일품인 저녁 식사입니다.'
+                title: '현지식 훠궈 (Hotpot)',
+                img: 'https://tse1.mm.bing.net/th/id/OIP.OY5dz4bnHTmvog6w_nbL4gHaFj?w=474&h=474&c=7&p=0',
+                desc: '신선한 재료를 육수에 살짝 데쳐 먹는 핫팟은 홍콩과 마카오에서 사랑받는 미식 문화입니다.\n\n**즐기는 법:**\n- **육수 선택:** 맑은 육수부터 매콤한 마라 육수까지 취향대로.\n- **재료:** 최상급 소고기 슬라이스, 신선한 해산물, 다양한 버섯과 야채.\n- **소스:** 참깨, 폰즈, 마늘 등 나만의 디핑 소스 만들기.\n따뜻한 국물과 풍성한 재료로 여행의 피로를 풀어보세요.'
+            },
+            'food_noodle': {
+                title: '굴국수 & 윙 (Oyster Sauce Noodle)',
+                img: 'https://tse3.mm.bing.net/th/id/OIP.2oYAwjot7D_StWVOOzbLjwHaE8?w=474&h=474&c=7&p=0',
+                desc: '현지인들이 즐겨 찾는 로컬 소울 푸드입니다. 감칠맛 나는 굴소스와 쫄깃한 면발의 조화가 일품입니다.\n\n**특징:**\n- **굴소스 비빔면:** 진한 굴소스에 볶아낸 면 요리로 남녀노소 누구나 좋아하는 맛.\n- **완탕면:** 맑은 육수에 새우 완탕이 들어간 깔끔한 국물 요리.\n- **닭날개 튀김:** 바삭하고 짭조름하여 국수와 찰떡궁합을 자랑하는 사이드 메뉴.'
             }
         };
 
@@ -783,7 +796,7 @@
             // 1. 이미지 및 텍스트 설정
             document.getElementById('modalImg').src = data.img;
             document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalDesc').innerText = data.desc;
+            document.getElementById('modalDesc').innerHTML = data.desc.replace(/\n/g, '<br>'); // 줄바꿈 처리
             
             // 2. 비디오 처리 로직
             const videoContainer = document.getElementById('videoContainer');
@@ -793,14 +806,15 @@
                 // 썸네일과 재생 버튼을 포함한 div 생성
                 const thumbnailDiv = document.createElement('div');
                 thumbnailDiv.className = 'video-thumbnail';
-                thumbnailDiv.style.backgroundImage = `url('${data.thumb}')`;
+                // Use YouTube HQ thumbnail
+                thumbnailDiv.style.backgroundImage = `url('https://img.youtube.com/vi/${data.videoId}/hqdefault.jpg')`;
                 thumbnailDiv.style.backgroundColor = '#000';
                 thumbnailDiv.innerHTML = '<div class="play-button"></div>';
                 
                 thumbnailDiv.onclick = function() {
                     const iframe = document.createElement('iframe');
                     // 공식 영상 연동 (Autoplay, Mute, Rel=0)
-                    iframe.setAttribute('src', `https://www.youtube.com/embed/${data.videoId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`);
+                    iframe.setAttribute('src', `https://www.youtube.com/embed/${data.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`);
                     iframe.setAttribute('frameborder', '0');
                     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
                     iframe.setAttribute('allowfullscreen', 'true');
