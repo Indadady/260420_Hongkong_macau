@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>투어메이커 - 홍콩 & 마카오 VIP 4박5일 초청 투어</title>
+    <title>홍콩 & 마카오 VIP 4박 5일 초청 투어 - 투어메이커</title>
     
     <!-- Open Graph (카카오톡/링크 공유 시 썸네일) -->
-    <meta property="og:title" content="홍콩 & 마카오 VIP 4박5일 초청 투어">
-    <meta property="og:description" content="고객님의 품격에 맞는 최고의 일정으로 모십니다.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1506318137071-a8bcbf675b27?q=80&w=2070&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="[VIP] 홍콩 & 마카오 4박 5일 명품 투어">
+    <meta property="og:description" content="2026.03.08(일) 출발! VIP 고객님만을 위한 완벽한 여정. 여행 준비물과 일정을 확인하세요.">
+    <!-- 썸네일: 홍콩 야경 이미지 -->
+    <meta property="og:image" content="https://images.openai.com/static-rsc-3/lQF8LUDWG7YUJhfyzw0TlRLZ8ByGHE1UoybZwAs1W8jSxyDuzz7eXI117DVjtfBWPKtgFlwTVgHQZYkE2WJnyjnHwnMj9gdpaNTBdCVl0O0?purpose=fullsize&v=1">
+    <meta property="og:site_name" content="투어메이커">
+
+    <!-- Google Analytics (GA4) 탑재 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // 대표님의 실제 구글 애널리틱스 측정 ID로 G-XXXXXXXXXX 부분을 변경해주세요.
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,593 +44,767 @@
             font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
             word-break: keep-all;
+            background-color: #f8fafc;
         }
-        .font-serif {
-            font-family: 'Noto Serif KR', serif;
-        }
-        /* 홍콩 야경 배경 (Victoria Harbour) - 고화질 URL 대체 */
+        .font-serif { font-family: 'Noto Serif KR', serif; }
+        
+        /* 메인 배경 (요청하신 이미지로 교체) */
         .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1558507856-11f26792348c?q=80&w=2070&auto=format&fit=crop');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.openai.com/static-rsc-3/lQF8LUDWG7YUJhfyzw0TlRLZ8ByGHE1UoybZwAs1W8jSxyDuzz7eXI117DVjtfBWPKtgFlwTVgHQZYkE2WJnyjnHwnMj9gdpaNTBdCVl0O0?purpose=fullsize&v=1');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+        
         .section-title {
             position: relative;
             display: inline-block;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: #ef4444;
+            content: ''; position: absolute; bottom: -10px; left: 0; width: 40px; height: 3px; background-color: #ef4444;
         }
         
-        /* Card Interactive Effects */
-        .spot-card, .food-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+        /* 타임라인 디자인 (가독성 강화) */
+        .timeline-line {
+            position: absolute; left: 15px; top: 10px; bottom: 0; width: 2px; background-color: #e2e8f0; z-index: 0;
         }
-        .spot-card:hover, .food-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        .spot-card:active, .food-card:active {
-            transform: scale(0.98);
-        }
-
-        /* Touch Hint Badge */
-        .touch-hint {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            z-index: 10;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        .timeline-dot {
+            position: absolute; left: -6px; top: 4px; width: 14px; height: 14px; border-radius: 50%; z-index: 10;
         }
 
         /* Modal */
-        .modal-container {
-            transition: all 0.3s ease-in-out;
-        }
+        .modal-container { transition: all 0.3s ease-in-out; }
         .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.5rem;
-            margin-top: 1.5rem;
-            display: none; /* Hidden by default */
-            background-color: #000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.5rem; margin-top: 1.5rem; display: none; background-color: #000; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .video-wrapper iframe, 
-        .video-thumbnail {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            background-size: cover;
-            background-position: center;
-        }
-        .play-button {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 0, 0, 0.9); /* YouTube Red */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .play-button::after {
-            content: '';
-            width: 0; 
-            height: 0; 
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 16px solid white;
-            margin-left: 4px;
-        }
-        .video-thumbnail:hover .play-button {
-            transform: translate(-50%, -50%) scale(1.1);
-            background-color: #ff0000;
+        .video-wrapper iframe, .video-thumbnail {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background-size: cover; background-position: center;
         }
 
-        /* Logo Blending Fix */
-        .logo-blend {
-             mix-blend-mode: multiply; 
-        }
+        /* 체크리스트 디자인 */
+        .check-item { transition: all 0.2s; }
+        .check-item:hover { background-color: #f1f5f9; }
+        input[type="checkbox"]:checked + span { text-decoration: line-through; color: #94a3b8; }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
         
-        /* Floating Button Animation */
-        @keyframes pulse-ring {
-            0% { transform: scale(0.33); }
-            80%, 100% { opacity: 0; }
+        /* Floating Badge Animation */
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
-        .pulse-ring::before {
-            content: ''; position: absolute; left: 0; right: 0; top: 0; bottom: 0;
-            background-color: #ef4444; border-radius: 50%; z-index: -1;
-            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        .d-day-badge { animation: pulse-border 2s infinite; }
+
+        /* =========================================================
+           [A4 1장 표(Table) 인쇄 전용 CSS] 
+           ========================================================= */
+        @media screen {
+            #print-area { display: none !important; }
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait; 
+                margin: 8mm; /* 인쇄 여백 최소화 */
+            }
+            html, body {
+                background-color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            /* 인쇄 시 웹 UI 통째로 숨김 */
+            #web-area { display: none !important; }
+            
+            /* 인쇄 영역 1페이지 꽉 채우기 */
+            #print-area { 
+                display: flex !important; 
+                flex-direction: column !important;
+                width: 100% !important;
+                height: 280mm !important; /* A4 안전 영역 */
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
+
+            .print-header-block, .print-footer-block { flex-shrink: 0 !important; }
+            
+            /* 표 공간 조율 */
+            #print-area table { 
+                flex-grow: 1 !important; 
+                border-collapse: collapse !important; 
+                width: 100% !important; 
+                border: 2px solid #000 !important; 
+                table-layout: fixed !important; 
+                margin-top: 10px !important;
+                margin-bottom: 10px !important;
+            }
+            #print-area th, #print-area td { 
+                border: 1px solid #4b5563 !important; 
+                color: #000 !important; 
+                word-break: keep-all !important; 
+                padding: 6px 8px !important; /* 여백 압축 */
+                vertical-align: middle !important;
+                font-size: 11pt !important;
+                line-height: 1.4 !important;
+            }
+            #print-area th { 
+                background-color: #f3f4f6 !important; 
+                border-bottom: 2px solid #000 !important;
+                font-size: 12pt !important;
+            }
+            .highlight-print { font-weight: bold; font-size: 11.5pt; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-800">
+<body class="text-gray-800">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white shadow-sm transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <!-- 투어메이커 로고 -->
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" alt="투어메이커 Logo" class="h-10 md:h-12 object-contain logo-blend">
-            </a>
-            
-            <div class="hidden md:flex space-x-6 font-medium text-gray-700 text-sm lg:text-base">
-                <a href="#about" class="hover:text-red-500 transition">포인트</a>
-                <a href="#day1" class="hover:text-red-500 transition">1일차</a>
-                <a href="#day2" class="hover:text-red-500 transition">2일차</a>
-                <a href="#day3" class="hover:text-red-500 transition">3일차</a>
-                <a href="#day4" class="hover:text-red-500 transition">4/5일차</a>
-                <a href="#hotel" class="hover:text-red-500 transition">호텔/식사</a>
-                <a href="tel:010-5115-6118" class="px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition shadow-lg flex items-center gap-2">
-                    <i class="fas fa-phone-alt"></i> VIP 상담
+    <!-- [웹 화면 전용 영역 시작] -->
+    <div id="web-area">
+
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <a href="#" class="flex items-center">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" alt="투어메이커 Logo" class="h-8 md:h-10 object-contain">
                 </a>
+                
+                <div class="hidden lg:flex space-x-6 font-bold text-gray-700 text-sm items-center">
+                    <a href="#prep" class="hover:text-red-500 transition">여행준비</a>
+                    <a href="#itinerary" class="hover:text-red-500 transition">상세일정</a>
+                    <a href="#videos" class="hover:text-red-500 transition">홍보영상</a>
+                    <button onclick="window.print()" class="text-xs font-bold text-gray-600 border border-gray-300 bg-white px-3 py-1.5 rounded-full hover:bg-gray-50 transition shadow-sm flex items-center">
+                        <i class="fas fa-print mr-1"></i>일정표 인쇄
+                    </button>
+                    <a href="tel:010-5115-6118" class="px-4 py-2 bg-[#006494] text-white rounded-full hover:bg-blue-800 transition shadow-md flex items-center gap-2">
+                        <i class="fas fa-phone-alt"></i> 담당자 직통
+                    </a>
+                </div>
+
+                <div class="lg:hidden flex items-center gap-3">
+                    <div id="nav-dday" class="text-red-600 font-black text-[11px] bg-red-50 px-2 py-1 rounded"></div>
+                    <button onclick="window.print()" class="text-gray-600 border border-gray-300 px-2 py-1 rounded shadow-sm text-sm"><i class="fas fa-print"></i></button>
+                    <button class="text-gray-700" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
+                <div class="flex flex-col p-4 space-y-3 font-medium">
+                    <a href="#prep" class="block text-gray-700">체크리스트 & 준비물</a>
+                    <a href="#itinerary" class="block text-gray-700">일정 자세히 보기</a>
+                    <a href="#videos" class="block text-gray-700">여행지 추천 영상</a>
+                    <a href="tel:010-5115-6118" class="block text-white font-bold bg-[#006494] p-3 rounded-lg text-center shadow-md">
+                        <i class="fas fa-phone mr-2"></i> 김효돈 이사 연결
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero-bg h-screen flex flex-col items-center justify-center text-center px-4 relative pt-10">
+            <!-- D-Day Badge -->
+            <div id="main-dday" class="d-day-badge absolute top-28 bg-red-600 text-white font-black text-xl md:text-2xl px-6 py-2 rounded-full shadow-2xl z-20">
+                D-DAY 계산중...
             </div>
 
-            <div class="md:hidden flex items-center gap-4">
-                <a href="tel:010-5115-6118" class="text-red-600 text-2xl animate-pulse"><i class="fas fa-phone-square-alt"></i></a>
-                <button class="text-gray-700" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"><i class="fas fa-bars text-2xl"></i></button>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <div class="flex flex-col p-4 space-y-3">
-                <a href="#about" class="block text-gray-700">핵심 포인트</a>
-                <a href="#day1" class="block text-gray-700">1일차 일정</a>
-                <a href="#day2" class="block text-gray-700">2일차 일정</a>
-                <a href="#day3" class="block text-gray-700">3일차 일정</a>
-                <a href="#day4" class="block text-gray-700">4/5일차 일정</a>
-                <a href="#hotel" class="block text-gray-700">호텔 및 식사</a>
-                <a href="tel:010-5115-6118" class="block text-red-600 font-bold bg-red-50 p-2 rounded text-center"><i class="fas fa-phone mr-2"></i> 김효돈 담당자 직통전화</a>
-            </div>
-        </div>
-    </nav>
+            <div class="text-white z-10 w-full max-w-4xl" data-aos="fade-up">
+                <div class="inline-block border border-yellow-400 rounded-full px-5 py-1.5 mb-5 bg-black/40 backdrop-blur-sm">
+                    <span class="text-yellow-400 font-bold tracking-wider text-sm md:text-base">VIP 초청 명품 투어 (16분)</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-light mb-2 text-white font-serif">화려한 야경과 낭만의 도시</h2>
+                <h1 class="text-5xl md:text-7xl font-black mb-6 text-shadow leading-tight font-serif">
+                    홍콩 & 마카오<br><span class="text-red-500">4박 5일</span> 프리미엄 투어
+                </h1>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center mt-8 max-w-3xl mx-auto">
+                    <div class="bg-white/20 backdrop-blur-md p-3 rounded-lg border border-white/30 shadow-lg">
+                        <i class="far fa-calendar-check text-2xl mb-1 text-yellow-300"></i>
+                        <span class="block text-xs text-gray-200">일정</span>
+                        <span class="font-bold text-sm md:text-base">3/8(일) ~ 3/12(목)</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md p-3 rounded-lg border border-white/30 shadow-lg">
+                        <i class="fas fa-plane-departure text-2xl mb-1 text-blue-300"></i>
+                        <span class="block text-xs text-gray-200">항공 (대한항공)</span>
+                        <span class="font-bold text-sm md:text-base">KE2001 / KE2016</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md p-3 rounded-lg border border-white/30 shadow-lg">
+                        <i class="fas fa-hotel text-2xl mb-1 text-green-300"></i>
+                        <span class="block text-xs text-gray-200">숙박 (특급)</span>
+                        <span class="font-bold text-[11px] md:text-sm">도르셋 쿤통 / 까사리얼</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md p-3 rounded-lg border border-white/30 shadow-lg">
+                        <i class="fas fa-users text-2xl mb-1 text-pink-300"></i>
+                        <span class="block text-xs text-gray-200">전담 가이드</span>
+                        <span class="font-bold text-sm md:text-base">윤정우 / 안현주</span>
+                    </div>
+                </div>
 
-    <a href="tel:010-5115-6118" class="fixed bottom-6 right-6 z-40 bg-red-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition pulse-ring md:hidden">
-        <i class="fas fa-phone-alt text-2xl"></i>
-    </a>
+                <div class="mt-12 animate-bounce">
+                    <a href="#prep" class="text-white text-3xl opacity-80 hover:opacity-100 transition"><i class="fas fa-chevron-down"></i></a>
+                </div>
+            </div>
+        </header>
 
-    <!-- Hero -->
-    <header class="hero-bg h-screen flex items-center justify-center text-center px-4 relative">
-        <div class="text-white z-10" data-aos="fade-up">
-            <div class="inline-block border border-yellow-400 rounded-full px-4 py-1 mb-4 bg-black/30 backdrop-blur-sm">
-                <span class="text-yellow-400 font-bold tracking-wider text-sm md:text-base">VIP SPECIAL INVITATION</span>
-            </div>
-            <h2 class="text-xl md:text-3xl font-light mb-2 text-white font-serif">고객님을 위한</h2>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-shadow leading-tight font-serif">
-                홍콩 & 마카오<br><span class="text-red-500">고품격 4박 5일</span> 여행
-            </h1>
-            <p class="text-base md:text-xl font-light mb-8 max-w-2xl mx-auto opacity-90 text-shadow">
-                아시아의 진주 홍콩의 화려한 야경과<br>동양의 라스베가스 마카오의 낭만을 동시에 경험하는 여정
-            </p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <div class="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-lg border border-white/30">
-                    <span class="block text-sm text-gray-200">출발일</span><span class="font-bold text-lg">2026. 04. 20 (월)</span>
+        <!-- 스마트 준비물 & 메모장 Section -->
+        <section id="prep" class="py-16 bg-white border-b">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-10" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 section-title">여행 준비 가이드</h2>
+                    <p class="text-gray-600 mt-2 font-medium">출발 전 꼼꼼히 확인하시고 편안한 여행 되시길 바랍니다.</p>
                 </div>
-                <div class="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-lg border border-white/30">
-                    <span class="block text-sm text-gray-200">항공편</span><span class="font-bold text-lg">대한항공 (KE)</span>
-                </div>
-            </div>
-            <div class="mt-12 animate-bounce">
-                <a href="#about" class="text-white text-3xl opacity-80 hover:opacity-100 transition"><i class="fas fa-chevron-down"></i></a>
-            </div>
-        </div>
-    </header>
 
-    <!-- About -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 section-title">Travel Highlights</h2>
-                <p class="text-gray-600">고객님들의 품격에 맞는 최고의 일정으로 모십니다.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-6 text-red-600"><i class="fas fa-gem text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-3">Two Cities Trip</h3>
-                    <p class="text-gray-500 text-sm">홍콩의 화려함과<br>마카오의 이국적 낭만을<br>한 번의 여행으로 완성</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-6 text-blue-600"><i class="fas fa-utensils text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-3">미식의 향연</h3>
-                    <p class="text-gray-500 text-sm">현지 딤섬, 매캐니즈(포르투갈식),<br>샤브샤브 등 다채로운<br>특식 제공 ($25 상당)</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 mx-auto bg-yellow-50 rounded-full flex items-center justify-center mb-6 text-yellow-600"><i class="fas fa-hotel text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-3">편안한 휴식</h3>
-                    <p class="text-gray-500 text-sm">마카오 크라운프라자 등<br>검증된 특급 호텔에서의<br>안락한 휴식 보장</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Day 1 -->
-    <section id="day1" class="py-20 bg-white border-b">
-        <div class="container mx-auto px-6">
-            <div class="flex items-end mb-12" data-aos="fade-right">
-                <div class="text-6xl font-black text-red-100 -mb-4 -ml-2 absolute z-0 select-none">01</div>
-                <div class="relative z-10">
-                    <span class="text-red-500 font-bold tracking-widest text-sm">DAY 1</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-1">홍콩의 낭만과 야경</h2>
-                    <p class="text-gray-500 mt-2 text-sm">인천 ➔ 홍콩 도착 ➔ 스타의거리 ➔ 1881 헤리티지</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="spot-card rounded-xl overflow-hidden lg:col-span-2" onclick="openModal('star_avenue')" data-aos="fade-up">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 홍콩관광청 공식영상</div>
-                    <div class="flex flex-col md:flex-row h-full">
-                        <div class="md:w-1/2 relative h-64 md:h-auto">
-                            <!-- 스타의 거리 이소룡상 -->
-                            <img src="https://viaggiatore.net/wp-content/uploads/2019/01/Statue-of-Bruce-Lee-at-Avenue-of-Stars-n-Hong-Kong-.jpg" onerror="this.src='https://via.placeholder.com/800x600?text=Avenue+of+Stars'" alt="Avenue of Stars" class="w-full h-full object-cover">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 날씨, 기본정보 및 가이드 연락처 -->
+                    <div class="flex flex-col gap-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-blue-50 p-6 rounded-2xl shadow-sm border border-blue-100 flex-grow">
+                            <h3 class="font-bold text-xl mb-4 text-blue-900 flex items-center"><i class="fas fa-cloud-sun text-2xl mr-2"></i> 현지 정보</h3>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-thermometer-half mt-1 text-blue-500 w-4"></i>
+                                    <div><strong>기온:</strong> 낮 20~22℃ / 밤 15~18℃<br><span class="text-xs text-gray-500">초여름 날씨이나 일교차가 있습니다.</span></div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-tshirt mt-1 text-blue-500 w-4"></i>
+                                    <div><strong>옷차림:</strong> 얇은 긴소매, 편한 운동화<br><span class="text-xs text-red-500 font-bold">실내 냉방 대비 가디건 필수!</span></div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-clock mt-1 text-blue-500 w-4"></i>
+                                    <div><strong>시차:</strong> 한국보다 1시간 느림</div>
+                                </li>
+                                <li class="flex items-start gap-2 border-t border-blue-200 pt-3 mt-3">
+                                    <i class="fas fa-ban mt-1 text-red-500 w-4"></i>
+                                    <div class="text-red-600 font-bold">전자담배 소지 절대 불가!<br><span class="text-xs text-gray-600 font-normal">일반 담배는 19개비 까지만 허용됩니다.</span></div>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold mb-3">스타의 거리 & 빅토리아 항구</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-4">홍콩의 스카이라인을 가장 아름답게 감상할 수 있는 해안 산책로입니다. 이소룡 동상과 홍콩 영화 스타들의 핸드프린팅을 찾아보며 빅토리아 항구의 낭만을 만끽할 수 있습니다.</p>
-                            <div class="bg-blue-50 p-4 rounded-lg"><span class="font-bold text-blue-700 text-sm">✨ View Point</span><p class="text-xs text-gray-600">빅토리아 항구의 파노라마 야경과 심포니 오브 라이트를 한눈에!</p></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden" onclick="openModal('heritage1881')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint bg-purple-600/80"><i class="fas fa-vr-cardboard"></i> 360° VR</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 1881 이미지 -->
-                        <img src="https://i.ytimg.com/vi/UV9G66CM1rE/maxresdefault.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=1881+Heritage'" alt="1881 Heritage" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">1881 헤리티지</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3">옛 해군경찰본부를 리모델링한 고풍스러운 쇼핑 & 문화 공간. 빅토리아풍 건축물이 돋보이는 야경 명소.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Day 2 -->
-    <section id="day2" class="py-20 bg-gray-50 border-b">
-        <div class="container mx-auto px-6">
-            <div class="flex items-end mb-12" data-aos="fade-right">
-                <div class="text-6xl font-black text-blue-100 -mb-4 -ml-2 absolute z-0 select-none">02</div>
-                <div class="relative z-10">
-                    <span class="text-blue-500 font-bold tracking-widest text-sm">DAY 2</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-1">홍콩의 문화와 절경</h2>
-                    <p class="text-gray-500 mt-2 text-sm">서구룡문화지구 ➔ 소호 ➔ 빅토리아피크 ➔ 나이트투어</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('west_kowloon')" data-aos="fade-up">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 공식 소개</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 서구룡 이미지 -->
-                        <img src="https://tse3.mm.bing.net/th/id/OIP.6c1Q3jcNVlOlv2JSuDs1DwHaEE?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=West+Kowloon'" alt="West Kowloon" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">서구룡 문화지구</h3>
-                        <p class="text-gray-600 text-sm mb-4">홍콩의 새로운 예술 허브. M+ 박물관과 탁 트인 하버뷰가 어우러진 최고의 산책 코스.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('soho')" data-aos="fade-up" data-aos-delay="50">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 핫플레이스</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 소호 이미지 -->
-                        <img src="https://tse4.mm.bing.net/th/id/OIP.al81Ubuu2yn3kPRu6k0rkQHaE7?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Soho+Hong+Kong'" alt="Soho" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">소호 & 미드레벨</h3>
-                        <p class="text-gray-600 text-sm mb-4">세계 최장 옥외 에스컬레이터를 타고 즐기는 이국적인 펍과 거리의 낭만.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('peak')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 꿀팁 영상</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 피크트램 이미지 -->
-                        <img src="https://tse1.mm.bing.net/th/id/OIP.1cyAgN1WjKMxzQ7sy8v0fgHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Victoria+Peak'" alt="The Peak" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">빅토리아 산정 (피크트램)</h3>
-                        <p class="text-gray-600 text-sm mb-4">45도 급경사를 오르는 피크트램. 정상에서 내려다보는 홍콩의 스카이라인은 압권입니다.</p>
-                        <div class="mt-4 bg-green-50 p-3 rounded-lg text-xs text-gray-600"><strong>✨ 포함:</strong> 피크트램 편도 탑승권</div>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm lg:col-span-3" onclick="openModal('hk_night')" data-aos="fade-up" data-aos-delay="150">
-                    <div class="flex flex-col md:flex-row h-full">
-                        <div class="md:w-1/3 relative h-64 md:h-auto">
-                            <!-- 홍콩 야경 이미지 교체 (User Request) -->
-                            <img src="https://tse1.mm.bing.net/th/id/OIP.cMuLC8PWh5vhtkMKRU5HDwHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Night+Tour'" alt="Mongkok" class="w-full h-full object-cover">
-                        </div>
-                        <div class="md:w-2/3 p-6 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold mb-3">홍콩 나이트 투어 (스타페리+2층버스+몽콕)</h3>
-                            <p class="text-gray-600 text-sm mb-4">홍콩의 밤을 정복하는 완벽한 코스. 스타페리로 바다를 건너고, 2층 버스로 네온사인 거리를 질주하며, 활기찬 몽콕 야시장을 탐방합니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Day 3 -->
-    <section id="day3" class="py-20 bg-white border-b">
-        <div class="container mx-auto px-6">
-            <div class="flex items-end mb-12" data-aos="fade-right">
-                <div class="text-6xl font-black text-green-100 -mb-4 -ml-2 absolute z-0 select-none">03</div>
-                <div class="relative z-10">
-                    <span class="text-green-600 font-bold tracking-widest text-sm">DAY 3</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-1">마카오로의 여정</h2>
-                    <p class="text-gray-500 mt-2 text-sm">웡타이신 ➔ 강주아오대교 ➔ 성바오로/세나도 ➔ 런더러/파리지앵</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="spot-card rounded-xl overflow-hidden" onclick="openModal('wongtaisin')" data-aos="fade-up">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 소원 성취</div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://tse1.mm.bing.net/th/id/OIP._R7m9FwI6mrP_a0rVEiQLAHaD4?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Wong+Tai+Sin'" alt="Wong Tai Sin" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-4 spot-content">
-                        <h3 class="text-lg font-bold mb-1">웡타이신 사원</h3>
-                        <p class="text-xs text-gray-500">모든 소원을 들어준다는 홍콩 최대 도교 사원.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden" onclick="openModal('bridge')" data-aos="fade-up" data-aos-delay="50">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 세계 최장 대교</div>
-                    <div class="relative h-48 overflow-hidden">
-                        <!-- 강주아오 대교 이미지 -->
-                        <img src="https://tse2.mm.bing.net/th/id/OIP.KTxK5_FjgxqYr8aIDm-1sQHaDP?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=HZMB+Bridge'" alt="HZMB" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-4 spot-content">
-                        <h3 class="text-lg font-bold mb-1">강주아오 대교</h3>
-                        <p class="text-xs text-gray-500">세계 최장 55km 해상 대교 횡단 체험.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden lg:col-span-2" onclick="openModal('st_paul')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 마카오 영상</div>
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://www.chinatoptrip.com/wp-content/uploads/2018/11/ruins-of-st-pauls-macau-china-1.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=St+Paul+Ruins'" alt="St. Paul" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-4 spot-content">
-                        <h3 class="text-lg font-bold mb-1">성 바오로 성당 & 세나도 광장</h3>
-                        <p class="text-xs text-gray-500 line-clamp-2">유네스코 세계문화유산. 마카오의 상징인 성당 유적과 유럽풍 물결무늬 광장, 그리고 육포/쿠키 거리 산책.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden lg:col-span-4" onclick="openModal('cotai_night')" data-aos="fade-up" data-aos-delay="150">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 야경 감상</div>
-                    <div class="flex flex-col md:flex-row h-full bg-black text-white">
-                        <div class="md:w-1/2 relative h-64 md:h-auto">
-                            <!-- 코타이 야경 이미지 교체 (User Request) -->
-                            <img src="https://tse3.mm.bing.net/th/id/OIP.4B6kUae4swu78CNyCXOafgHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/800x600?text=Cotai+Night'" alt="Parisian" class="w-full h-full object-cover opacity-90">
-                            <div class="absolute bottom-4 left-4 font-bold text-xl text-shadow">COTAI NIGHT VIEW</div>
-                        </div>
-                        <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold mb-2">코타이 야경 (런더러 & 파리지앵)</h3>
-                            <p class="text-gray-300 text-sm mb-4">실물 크기 1/2 에펠탑과 빅벤이 빛나는 화려한 밤. MGM 호텔 실내 정원과 함께 동양의 라스베이거스를 만끽하세요.</p>
-                            <div class="flex gap-2">
-                                <span class="bg-gray-800 px-3 py-1 rounded text-xs">MGM 실내정원</span>
-                                <span class="bg-gray-800 px-3 py-1 rounded text-xs">에펠탑 조명</span>
+                        
+                        <!-- 현지 가이드 비상 연락처 -->
+                        <div class="bg-gray-800 p-5 rounded-2xl shadow-sm text-white">
+                            <h3 class="font-bold text-lg mb-3 flex items-center text-yellow-400"><i class="fas fa-user-headset mr-2"></i> 현지 가이드 비상망</h3>
+                            <div class="text-sm space-y-3">
+                                <div class="bg-gray-700 p-2 rounded">
+                                    <span class="text-xs text-gray-400 block mb-1">🇭🇰 홍콩 전담</span>
+                                    <span class="font-bold">윤정우 가이드</span> <br><span class="text-blue-300 tracking-wider">☎ +852 6945-5065</span>
+                                </div>
+                                <div class="bg-gray-700 p-2 rounded">
+                                    <span class="text-xs text-gray-400 block mb-1">🇲🇴 마카오 전담</span>
+                                    <span class="font-bold">안현주 가이드</span> <br><span class="text-green-300 tracking-wider">☎ +853 6349-2469</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 인터랙티브 체크리스트 및 커진 메모장 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 lg:col-span-2 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="font-bold text-xl flex items-center gap-2 text-gray-800">
+                                <i class="fas fa-check-square text-green-500 text-2xl"></i> 스마트 체크리스트
+                            </h3>
+                            <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md border border-gray-200">자동 저장됩니다</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 mb-6">
+                            <!-- Checklist Items -->
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg check-item cursor-pointer border border-transparent hover:border-gray-200">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 checklist-cb" id="chk1">
+                                <span class="font-medium text-gray-800">여권 (만료일 6개월 이상)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg check-item cursor-pointer border border-transparent hover:border-gray-200">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 checklist-cb" id="chk2">
+                                <span class="font-medium text-gray-800">현지 경비 환전 (홍콩달러 HKD$)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg check-item cursor-pointer bg-red-50 border border-red-100">
+                                <input type="checkbox" class="w-5 h-5 text-red-600 rounded focus:ring-red-500 checklist-cb" id="chk3">
+                                <span class="font-bold text-red-700">멀티 어댑터 (홍콩 3구 플러그 필수)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg check-item cursor-pointer border border-transparent hover:border-gray-200">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 checklist-cb" id="chk4">
+                                <span class="font-medium text-gray-800">개인 세면도구 (칫솔, 치약 등)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg check-item cursor-pointer border border-transparent hover:border-gray-200">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 checklist-cb" id="chk5">
+                                <span class="font-medium text-gray-800">상비약 (소화제, 감기약 등)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2.5 rounded-lg check-item cursor-pointer border border-transparent hover:border-gray-200">
+                                <input type="checkbox" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 checklist-cb" id="chk6">
+                                <span class="font-medium text-gray-800">밑반찬 (컵라면 등 화물 위탁)</span>
+                            </label>
+                        </div>
+
+                        <!-- 큼직한 나만의 메모장 -->
+                        <div class="relative flex-grow flex flex-col">
+                            <label for="userMemo" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-pen-alt text-yellow-500 mr-2 text-lg"></i> 나만의 여행 메모장
+                            </label>
+                            <textarea id="userMemo" rows="6" class="w-full flex-grow p-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-inner bg-yellow-50/50 resize-none leading-relaxed" placeholder="면세점 구입 품목, 사야할 기념품, 가족들 선물 리스트 등 자유롭게 메모하세요. (입력 시 자동 저장됩니다)"></textarea>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- 가독성 중심 타임라인 상세 일정표 -->
+        <section id="itinerary" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-4xl">
+                
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10 border-b-2 border-gray-800 pb-4">
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 flex items-center">
+                        <i class="fas fa-map-marked-alt mr-3 text-red-500"></i> 상세 일정 가이드
+                    </h2>
+                    <button onclick="window.print()" class="mt-4 md:mt-0 bg-gray-800 hover:bg-gray-900 text-white font-bold py-2.5 px-5 rounded-lg shadow-md transition-colors flex items-center text-sm">
+                        <i class="fas fa-print mr-2 text-lg"></i> A4 일정표 인쇄하기
+                    </button>
+                </div>
+
+                <!-- Day 1 -->
+                <div class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" data-aos="fade-up">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-red-600 text-white font-black text-xl rounded-lg px-4 py-2 mr-3 shadow-md">1일차</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-800">3월 8일 (일)</h3>
+                            <p class="text-sm text-gray-500">인천 ➔ 홍콩 야경 투어</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="timeline-line"></div>
+                        
+                        <!-- 일정 아이템 -->
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-blue-500"></div>
+                            <div class="ml-4">
+                                <span class="text-blue-600 font-bold text-sm">08:10 ~ 11:20</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1">인천 출발 ➔ 홍콩 도착 (KE2001)</h4>
+                                <p class="text-gray-600 text-sm mt-1">홍콩 공항 A게이트 가이드 미팅 후 중식 (한식)</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-green-500"></div>
+                            <div class="ml-4">
+                                <span class="text-green-600 font-bold text-sm">오후 투어</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1 cursor-pointer hover:text-red-500 transition" onclick="openModal('soho')">
+                                    소호 거리 & 헐리우드 로드 <i class="fas fa-search-plus text-sm text-gray-400 ml-1"></i>
+                                </h4>
+                                <p class="text-gray-600 text-sm mt-1">세계 최장 미드레벨 에스컬레이터 탑승 및 이국적 골목 탐방</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-green-500"></div>
+                            <div class="ml-4">
+                                <span class="text-green-600 font-bold text-sm">오후 투어</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1 cursor-pointer hover:text-red-500 transition" onclick="openModal('peak')">
+                                    빅토리아 산정 <span class="text-red-500 text-sm">(피크트램 편도 탑승)</span> <i class="fas fa-search-plus text-sm text-gray-400 ml-1"></i>
+                                </h4>
+                                <p class="text-gray-600 text-sm mt-1">홍콩 야경의 백미. 45도 급경사를 오르는 트램 탑승</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-purple-500"></div>
+                            <div class="ml-4">
+                                <span class="text-purple-600 font-bold text-sm">나이트 투어</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1 cursor-pointer hover:text-red-500 transition" onclick="openModal('hk_night')">
+                                    홍콩 나이트 투어 (야시장) <i class="fas fa-search-plus text-sm text-gray-400 ml-1"></i>
+                                </h4>
+                                <p class="text-gray-600 text-sm mt-1 bg-yellow-50 inline-block px-2 py-1 rounded">스타페리 탑승 + 2층 오픈투어버스 + 몽콕 야시장</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 식사/호텔 요약 -->
+                    <div class="bg-gray-50 p-4 rounded-xl mt-4 flex flex-col md:flex-row gap-4 border border-gray-100 text-sm font-medium">
+                        <div class="flex items-center text-orange-700"><i class="fas fa-utensils mr-2"></i> 중: 한식 / 석: 광동식</div>
+                        <div class="flex items-center text-indigo-700"><i class="fas fa-bed mr-2"></i> 도르셋 쿤통 호텔 (Dorsett Kwun Tong)</div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" data-aos="fade-up">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-red-600 text-white font-black text-xl rounded-lg px-4 py-2 mr-3 shadow-md">2일차</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-800">3월 9일 (월)</h3>
+                            <p class="text-sm text-gray-500">홍콩 도심 명소 및 야경쇼</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-orange-500"></div>
+                            <div class="ml-4">
+                                <span class="text-orange-600 font-bold text-sm">오전 일정</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1">호텔 조식 후 시내 관광</h4>
+                                <p class="text-gray-600 text-sm mt-1">동양의 하와이 '리펄스베이' 및 이국적인 '스탠리 마켓' 구경</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-green-500"></div>
+                            <div class="ml-4">
+                                <span class="text-green-600 font-bold text-sm">오후 일정</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1 cursor-pointer hover:text-red-500 transition" onclick="openModal('star_avenue')">
+                                    1881 헤리티지 & 스타의 거리 <i class="fas fa-search-plus text-sm text-gray-400 ml-1"></i>
+                                </h4>
+                                <p class="text-gray-600 text-sm mt-1">옛 해군기지가 탈바꿈한 고풍스런 쇼핑명소 및 해안 산책로 탐방</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-purple-500"></div>
+                            <div class="ml-4">
+                                <span class="text-purple-600 font-bold text-sm">야간 투어</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1">심포니 오브 라이트 레이저쇼</h4>
+                                <p class="text-gray-600 text-sm mt-1">기네스북에 등재된 세계 최대의 상설 조명 & 사운드 쇼 감상</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 식사/호텔 요약 -->
+                    <div class="bg-gray-50 p-4 rounded-xl mt-4 flex flex-col md:flex-row gap-4 border border-gray-100 text-sm font-medium">
+                        <div class="flex items-center text-orange-700"><i class="fas fa-utensils mr-2"></i> 조: 호텔식 / 중: 딤섬 / 석: 광동특식</div>
+                        <div class="flex items-center text-indigo-700"><i class="fas fa-bed mr-2"></i> 도르셋 쿤통 호텔 (연박)</div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" data-aos="fade-up">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-red-600 text-white font-black text-xl rounded-lg px-4 py-2 mr-3 shadow-md">3일차</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-800">3월 10일 (화)</h3>
+                            <p class="text-sm text-gray-500">마카오 이동 및 세계문화유산</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-blue-500"></div>
+                            <div class="ml-4">
+                                <span class="text-blue-600 font-bold text-sm">오전 투어 & 이동</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1">웡타이신 사원 & 강주아오 대교 횡단</h4>
+                                <p class="text-gray-600 text-sm mt-1">홍콩 최대 도교사원 참배 후 셔틀버스로 마카오로 이동 (가이드 미동행 구간 포함)</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-green-500"></div>
+                            <div class="ml-4">
+                                <span class="text-green-600 font-bold text-sm">마카오 도착 후</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1 cursor-pointer hover:text-red-500 transition" onclick="openModal('st_paul')">
+                                    유네스코 세계문화유산 투어 <i class="fas fa-search-plus text-sm text-gray-400 ml-1"></i>
+                                </h4>
+                                <p class="text-gray-600 text-sm mt-1">성 바오로 성당, 몬테요새, 세나도 광장, 육포 및 쿠키거리 산책</p>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-purple-500"></div>
+                            <div class="ml-4">
+                                <span class="text-purple-600 font-bold text-sm">마카오 야간 투어</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1 cursor-pointer hover:text-red-500 transition" onclick="openModal('cotai_night')">
+                                    코타이 화려한 야경 감상 <i class="fas fa-search-plus text-sm text-gray-400 ml-1"></i>
+                                </h4>
+                                <p class="text-gray-600 text-sm mt-1">윈호텔 분수쇼, 파리지앵 에펠탑, 빅벤 조명 등 카지노 거리 자유시간</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl mt-4 flex flex-col gap-2 border border-gray-100 text-sm font-medium">
+                        <div class="flex items-center text-orange-700"><i class="fas fa-utensils mr-2"></i> 조: 호텔식 / 중: 전골류 / 석: 매캐니즈 특식 (덤보레스토랑)</div>
+                        <div class="flex items-center text-indigo-700"><i class="fas fa-bed mr-2"></i> 까사 리얼 호텔 마카오 (Casa Real Hotel)</div>
+                    </div>
+                </div>
+
+                <!-- Day 4 & 5 -->
+                <div class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" data-aos="fade-up">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-red-600 text-white font-black text-xl rounded-lg px-4 py-2 mr-3 shadow-md">4/5일차</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-800">3월 11일(수) ~ 12일(목)</h3>
+                            <p class="text-sm text-gray-500">마카오의 낭만 산책 & 한국 복귀</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-6">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-green-500"></div>
+                            <div class="ml-4">
+                                <span class="text-green-600 font-bold text-sm">4일차 (3/11 수)</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1">로컬 빌리지 & 호텔 쇼 투어</h4>
+                                <ul class="text-gray-600 text-sm mt-2 list-disc list-inside space-y-1">
+                                    <li>올드 타이파 빌리지 (고즈넉한 정취)</li>
+                                    <li>콜로안 빌리지 & 성 자비에르 성당 (에그타르트 시식 1개 포함)</li>
+                                    <li>MGM 호텔 실내정원 & 갤럭시 호텔 다이아몬드 쇼</li>
+                                    <li>베네시안 리조트 실내 운하 및 자유시간</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="relative mb-6">
+                            <div class="timeline-dot bg-blue-500"></div>
+                            <div class="ml-4">
+                                <span class="text-blue-600 font-bold text-sm">5일차 (3/12 목)</span>
+                                <h4 class="font-bold text-lg text-gray-800 mt-1">아마 사원 ➔ 공항 이동</h4>
+                                <p class="text-gray-600 text-sm mt-1">항해의 신을 모신 아마사원 관람 후 공항 이동<br>
+                                <strong class="text-blue-700">KE2016 탑승 (14:55 마카오 출발 ➔ 19:40 인천 도착)</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl mt-4 flex flex-col gap-2 border border-gray-100 text-sm font-medium">
+                        <div class="text-orange-700"><i class="fas fa-utensils mr-2 w-4"></i> 4일차 : 조(호텔) / 중(한식) / 석(샤브샤브 특식)</div>
+                        <div class="text-orange-700"><i class="fas fa-utensils mr-2 w-4"></i> 5일차 : 조(호텔) / 중(현지 굴국수)</div>
+                        <div class="flex items-center text-indigo-700 border-t pt-2 mt-1"><i class="fas fa-bed mr-2 w-4"></i> 까사 리얼 호텔 (4일차 숙박)</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 영상 큐레이션 섹션 (신규 추가) -->
+        <section id="videos" class="py-16 bg-white border-b border-gray-200">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-10" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 section-title">미리 만나는 홍콩 & 마카오</h2>
+                    <p class="text-gray-600 mt-2 font-medium">영상으로 여행지의 설렘을 먼저 느껴보세요.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 홍콩 홍보 영상 -->
+                    <div class="bg-gray-50 rounded-2xl shadow-md overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow" data-aos="fade-up">
+                        <div class="p-4 border-b border-gray-200 bg-white flex justify-between items-center">
+                            <h3 class="font-bold text-lg text-gray-800 flex items-center">
+                                <i class="fab fa-youtube text-red-500 mr-2 text-xl"></i> 홍콩 (Hong Kong)
+                            </h3>
+                            <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded font-bold">홍보영상</span>
+                        </div>
+                        <!-- 16:9 비율 컨테이너 -->
+                        <div class="relative pb-[56.25%] h-0 overflow-hidden bg-black">
+                            <iframe src="https://www.youtube.com/embed/qK45oCw--4I?rel=0" 
+                                    class="absolute top-0 left-0 w-full h-full border-0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- 마카오 홍보 영상 -->
+                    <div class="bg-gray-50 rounded-2xl shadow-md overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-4 border-b border-gray-200 bg-white flex justify-between items-center">
+                            <h3 class="font-bold text-lg text-gray-800 flex items-center">
+                                <i class="fab fa-youtube text-red-500 mr-2 text-xl"></i> 마카오 (Macao)
+                            </h3>
+                            <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded font-bold">홍보영상</span>
+                        </div>
+                        <!-- 16:9 비율 컨테이너 -->
+                        <div class="relative pb-[56.25%] h-0 overflow-hidden bg-black">
+                            <iframe src="https://www.youtube.com/embed/13dzs-9geyo?rel=0" 
+                                    class="absolute top-0 left-0 w-full h-full border-0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Footer -->
+        <footer class="bg-gray-50 pt-12 pb-6">
+            <div class="container mx-auto px-6">
+                <!-- Contact Card -->
+                <div class="bg-gray-800 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between mb-10 max-w-4xl mx-auto shadow-xl">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl shadow-lg">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="ml-4 text-left">
+                            <p class="text-gray-400 text-sm">VIP 전담 담당자</p>
+                            <p class="text-white font-bold text-xl">김효돈 이사님</p>
+                        </div>
+                    </div>
+                    <a href="tel:010-5115-6118" class="w-full md:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition shadow-md flex items-center justify-center text-lg gap-2">
+                        <i class="fas fa-phone-volume"></i> 010-5115-6118 연결
+                    </a>
+                </div>
+
+                <!-- 투어메이커 공통 Footer 형식 -->
+                <div class="text-center">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" alt="Tourmaker Logo" class="h-8 mx-auto mb-3 opacity-90 object-contain">
+                    <p style="font-size: 13px; color: #6c757d; font-weight: 500;">
+                        [System Powered by TOURMAKER] 본 스마트 가이드북은 기획과 <a href="http://tourmaker.kr" target="_blank" style="text-decoration: underline; color: #6c757d; font-weight: bold;">투어메이커</a>의 트래블 테크 기술 제휴로 제작되었습니다.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- [웹 화면 전용 영역 종료] -->
+
+
+    <!-- =========================================================
+         [인쇄 전용 (A4) 레이아웃 시작] 
+         ========================================================= -->
+    <div id="print-area" class="bg-white text-black font-sans mx-auto">
+        
+        <!-- 상단 헤더 영역 -->
+        <div class="print-header-block border-b-4 border-black pb-2 mb-2 text-center">
+            <h1 class="text-[20pt] font-black text-center mb-1 tracking-tight">[VIP] 홍콩 & 마카오 명품 투어 4박 5일 일정표</h1>
+            <p class="text-center text-[12pt] text-gray-800 font-bold mb-1 tracking-wide">
+                일정: 2026.03.08(일) ~ 03.12(목) &nbsp;|&nbsp; 인원: 16+1명 &nbsp;|&nbsp; 항공: 대한항공(KE) &nbsp;|&nbsp; 담당: 김효돈 이사님
+            </p>
+            <p class="text-center text-[10.5pt] text-gray-600 mt-1">※ 본 일정표는 현지 사정(기상, 교통 등)에 따라 다소 변경될 수 있습니다.</p>
+        </div>
+        
+        <!-- 4박 5일 상세 표 (1장에 꽉 차게) -->
+        <table class="w-full border-collapse border-2 border-black shadow-sm">
+            <thead>
+                <tr class="bg-gray-100 text-center">
+                    <th class="border border-gray-400 p-1 w-[8%] font-black">일자</th>
+                    <th class="border border-gray-400 p-1 w-[10%] font-black">지역</th>
+                    <th class="border border-gray-400 p-1 w-[8%] font-black">교통</th>
+                    <th class="border border-gray-400 p-1 w-[58%] font-black">상세일정</th>
+                    <th class="border border-gray-400 p-1 w-[16%] font-black">식사/호텔</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 1일차 -->
+                <tr>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">1일차<br><span class="text-[10pt] font-normal">3/8(일)</span></td>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">인천<br>홍콩</td>
+                    <td class="border border-gray-400 p-2 text-center text-[10pt]">KE2001<br>전용차</td>
+                    <td class="border border-gray-400 p-2">
+                        <ul class="list-disc pl-4 space-y-1 text-[10.5pt]">
+                            <li><strong class="text-[11pt]">08:10</strong> 인천 출발 ➔ <strong class="text-[11pt]">11:20</strong> 홍콩 도착 후 가이드 미팅</li>
+                            <li><strong class="text-[11pt]">소호거리</strong> (미드레벨 에스컬레이터) 및 헐리우드 로드 관광</li>
+                            <li>홍콩 야경의 백미 <strong class="text-[11pt]">빅토리아 산정</strong> (피크트램 편도)</li>
+                            <li><strong class="text-[11pt] text-blue-800">홍콩 나이트투어:</strong> 스타페리 + 2층투어버스 + 몽콕야시장</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-400 p-2 text-center text-[10.5pt] leading-tight">
+                        <span class="text-gray-500">조: 불포함</span><br>
+                        <strong>중: 한식</strong><br>
+                        <strong>석: 광동식</strong><br>
+                        <span class="text-blue-700 font-bold block mt-1 text-[9pt]">도르셋 쿤통 호텔</span>
+                    </td>
+                </tr>
+                <!-- 2일차 -->
+                <tr>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">2일차<br><span class="text-[10pt] font-normal">3/9(월)</span></td>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">홍콩</td>
+                    <td class="border border-gray-400 p-2 text-center text-[10pt]">전용차</td>
+                    <td class="border border-gray-400 p-2">
+                        <ul class="list-disc pl-4 space-y-1 text-[10.5pt]">
+                            <li>호텔 조식 후 전일 시내관광 출발</li>
+                            <li>동양의 하와이 <strong class="text-[11pt]">리펄스베이</strong> 및 <strong class="text-[11pt]">스탠리 마켓</strong> 구경</li>
+                            <li>옛 해군기지가 쇼핑명소로, <strong class="text-[11pt]">1881 헤리티지</strong></li>
+                            <li>스타의 거리, 연인의 거리 등 명소 탐방</li>
+                            <li>백만불 야경 <strong class="text-[11pt] text-blue-800">심포니 오브 라이트</strong> 감상</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-400 p-2 text-center text-[10.5pt] leading-tight">
+                        <strong>조: 호텔식</strong><br>
+                        <strong class="text-red-600">중: 딤섬</strong><br>
+                        <strong>석: 광동특식</strong><br>
+                        <span class="text-blue-700 font-bold block mt-1 text-[9pt]">도르셋 쿤통 호텔</span>
+                    </td>
+                </tr>
+                <!-- 3일차 -->
+                <tr>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">3일차<br><span class="text-[10pt] font-normal">3/10(화)</span></td>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">홍콩<br>마카오</td>
+                    <td class="border border-gray-400 p-2 text-center text-[10pt]">셔틀<br>전용차</td>
+                    <td class="border border-gray-400 p-2">
+                        <ul class="list-disc pl-4 space-y-1 text-[10.5pt]">
+                            <li>홍콩 최대 도교사원 <strong class="text-[11pt]">웡타이신 사원</strong> 관람</li>
+                            <li><strong class="text-[11pt] text-blue-800">강주아오 대교 셔틀버스</strong> 이용하여 마카오 이동</li>
+                            <li>유네스코 세계문화유산 <strong class="text-[11pt]">성바오로 성당 유적</strong> 및 몬테요새</li>
+                            <li>성도미니크, 육포/쿠키거리, <strong class="text-[11pt]">세나도 광장</strong></li>
+                            <li><strong class="text-[11pt] text-blue-800">마카오 야경투어:</strong> 윈호텔 분수쇼+파리지앵+빅벤 조명</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-400 p-2 text-center text-[10.5pt] leading-tight">
+                        <strong>조: 호텔식</strong><br>
+                        <strong>중: 전골류</strong><br>
+                        <strong class="text-red-600">석: 매캐니즈</strong><br>
+                        <span class="text-blue-700 font-bold block mt-1 text-[9pt]">까사 리얼 호텔</span>
+                    </td>
+                </tr>
+                <!-- 4일차 -->
+                <tr>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">4일차<br><span class="text-[10pt] font-normal">3/11(수)</span></td>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">마카오</td>
+                    <td class="border border-gray-400 p-2 text-center text-[10pt]">전용차</td>
+                    <td class="border border-gray-400 p-2">
+                        <ul class="list-disc pl-4 space-y-1 text-[10.5pt]">
+                            <li>옛 정취를 느낄 수 있는 <strong class="text-[11pt]">올드 타이파 빌리지</strong></li>
+                            <li><strong class="text-[11pt]">콜로안 빌리지</strong> 및 성 자비에르 성당 (에그타르트 1개 제공)</li>
+                            <li>MGM호텔 실내정원 및 <strong class="text-[11pt]">갤럭시 다이아몬드 쇼</strong> 관람</li>
+                            <li>이탈리아 베네치아 테마 <strong class="text-[11pt]">베네시안 카지노 리조트</strong> 투어</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-400 p-2 text-center text-[10.5pt] leading-tight">
+                        <strong>조: 호텔식</strong><br>
+                        <strong>중: 한식</strong><br>
+                        <strong class="text-red-600">석: 샤브샤브</strong><br>
+                        <span class="text-blue-700 font-bold block mt-1 text-[9pt]">까사 리얼 호텔</span>
+                    </td>
+                </tr>
+                <!-- 5일차 -->
+                <tr>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">5일차<br><span class="text-[10pt] font-normal">3/12(목)</span></td>
+                    <td class="border border-gray-400 p-2 text-center highlight-print">마카오<br>인천</td>
+                    <td class="border border-gray-400 p-2 text-center text-[10pt]">전용차<br>KE2016</td>
+                    <td class="border border-gray-400 p-2">
+                        <ul class="list-disc pl-4 space-y-1 text-[10.5pt]">
+                            <li>항해의 신 '아마'를 모신 마카오 가장 오랜 사원 <strong class="text-[11pt]">아마사원</strong></li>
+                            <li>관람 및 중식 후 공항으로 이동</li>
+                            <li><strong class="text-[11pt]">14:55</strong> 마카오 공항 출발 ➔ <strong class="text-[11pt]">19:40</strong> 인천국제공항 도착</li>
+                            <li class="text-red-600 font-bold mt-1">도착 및 안녕히 가십시오.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-400 p-2 text-center text-[10.5pt] leading-tight">
+                        <strong>조: 호텔식</strong><br>
+                        <strong class="text-red-600">중: 굴국수</strong><br>
+                        <span class="text-gray-500">석: 기내식</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 하단 푸터 (비상연락처 및 로고) -->
+        <div class="print-footer-block mt-2">
+            <div class="border-2 border-gray-300 p-2 rounded-lg bg-gray-50 mb-2">
+                <h3 class="font-bold text-[11pt] mb-1">■ 현지 전담 가이드 및 비상 연락처</h3>
+                <p class="text-[10.5pt]">🇭🇰 홍콩 가이드: <strong>윤정우 (☎ +852 6945-5065)</strong> &nbsp;&nbsp;|&nbsp;&nbsp; 🇲🇴 마카오 가이드: <strong>안현주 (☎ +853 6349-2469)</strong></p>
+                <p class="text-[10.5pt] mt-1 text-blue-800 font-bold">한국 총괄 담당: 김효돈 이사님 (☎ 010-5115-6118)</p>
+            </div>
+
+            <div class="flex justify-between items-center border-t-2 border-black pt-2">
+                <div class="flex items-center gap-2">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" alt="Tourmaker Logo" style="height: 18px;">
+                </div>
+                <span class="text-[9pt] text-gray-500 font-medium">[System Powered by TOURMAKER] 본 스마트 가이드북은 기획과 투어메이커의 기술 제휴로 제작되었습니다.</span>
             </div>
         </div>
-    </section>
+        
+    </div>
+    <!-- [인쇄 전용 (A4) 레이아웃 종료] -->
 
-    <!-- Day 4/5 -->
-    <section id="day4" class="py-20 bg-gray-50 border-b">
-        <div class="container mx-auto px-6">
-            <div class="flex items-end mb-12" data-aos="fade-right">
-                <div class="text-6xl font-black text-yellow-100 -mb-4 -ml-2 absolute z-0 select-none">04/5</div>
-                <div class="relative z-10">
-                    <span class="text-yellow-600 font-bold tracking-widest text-sm">DAY 4 & 5</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-1">마카오의 여유와 화려함</h2>
-                    <p class="text-gray-500 mt-2 text-sm">콜로안 ➔ 타이파 ➔ 다이아몬드쇼 ➔ 카지노야경 ➔ 아마사원</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('coloane')" data-aos="fade-up">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 보기</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://macaulifestyle.com/wp-content/uploads/2020/02/St-Francis-Xavier-Church-Wide-Exterior-Coloane-Village-Macau-Lifestyle.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Coloane'" alt="Coloane" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">콜로안 빌리지</h3>
-                        <p class="text-gray-600 text-sm mb-4">드라마 '궁' 촬영지 성 자비에르 성당과 원조 에그타르트의 본고장.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('taipa')" data-aos="fade-up" data-aos-delay="50">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 보기</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://www.taipavillagemacau.com/wp-content/uploads/2016/03/Taipa_Houses_Museum.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Taipa'" alt="Taipa Houses" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">타이파 빌리지 & 주택박물관</h3>
-                        <p class="text-gray-600 text-sm mb-4">민트색 포르투갈풍 주택과 아기자기한 골목 산책.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('galaxy')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint bg-red-600/80"><i class="fab fa-youtube"></i> 쇼 하이라이트</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 갤럭시 이미지 -->
-                        <img src="https://tse2.mm.bing.net/th/id/OIP.4wohTzAJ2HEHUJIiUeD4ngHaEK?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Galaxy'" alt="Galaxy" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">갤럭시 다이아몬드 쇼</h3>
-                        <p class="text-gray-600 text-sm mb-4">거대한 다이아몬드와 분수가 춤추는 압도적인 무료 쇼.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('macau_tower')" data-aos="fade-up" data-aos-delay="150">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 360° 전망</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 마카오 타워 이미지 교체 (User Request) -->
-                        <img src="https://tse3.mm.bing.net/th/id/OIP.WrZZE8XmTEHpFTPAAX042QHaLH?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Macau+Tower'" alt="Macau Tower" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">마카오 타워</h3>
-                        <p class="text-gray-600 text-sm mb-4">338m 높이에서 내려다보는 360도 파노라마 전경.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('venetian')" data-aos="fade-up" data-aos-delay="150">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 보기</div>
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 베네시안 이미지 교체 (User Request) -->
-                        <img src="https://tse3.mm.bing.net/th/id/OIP.AYPM0ld1Knpmu-ttoMnsmAHaGk?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=Night+Tour'" alt="Night" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">베네시안 & 윈 분수쇼</h3>
-                        <p class="text-gray-600 text-sm mb-4">인공 운하와 곤돌라, 그리고 윈 호텔의 화려한 분수쇼 감상.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-sm" onclick="openModal('ama')" data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative h-64 overflow-hidden">
-                        <!-- 아마사원 이미지 -->
-                        <img src="https://tse1.mm.bing.net/th/id/OIP.lO8Y5aSapF1OoRFzYqn5KwHaFE?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/400x300?text=A-Ma+Temple'" alt="A-Ma Temple" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 spot-content">
-                        <h3 class="text-xl font-bold mb-2">아마 사원 (DAY 5)</h3>
-                        <p class="text-gray-600 text-sm mb-4">마카오의 뿌리, 가장 오래된 도교 사원 탐방.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hotel & Food -->
-    <section id="hotel" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-red-500 font-bold tracking-wider uppercase text-sm">ACCOMMODATION & DINING</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">편안한 휴식과 미식</h2>
-            </div>
-            
-            <!-- Hotels -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
-                <div class="spot-card rounded-xl overflow-hidden shadow-lg border border-gray-100 flex flex-col md:flex-row" onclick="openModal('hotel_macau')" data-aos="fade-up">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 호텔 전경</div>
-                    <div class="md:w-1/2 h-64 md:h-auto relative">
-                        <img src="https://digital.ihg.com/is/image/ihg/crowne-plaza-macau-4892329475-2x1" onerror="this.src='https://via.placeholder.com/400x300?text=Crowne+Plaza'" alt="Crowne Plaza Macau Room" class="w-full h-full object-cover">
-                    </div>
-                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-sm text-gray-400 mb-1">MACAU</span>
-                        <h3 class="text-2xl font-bold mb-2">크라운프라자 마카오</h3>
-                        <p class="text-red-500 font-bold text-sm mb-4">★★★★★ (5성급)</p>
-                        <p class="text-gray-600 text-sm mb-4">홍콩–주하이–마카오 대교 인근. 남중국해를 조망하는 통유리창 객실과 실내 수영장, MICE 시설을 갖춘 프리미엄 호텔입니다.</p>
-                    </div>
-                </div>
-                <div class="spot-card rounded-xl overflow-hidden shadow-lg border border-gray-100 flex flex-col md:flex-row" onclick="openModal('hotel_hk')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="touch-hint"><i class="fas fa-images"></i> 상세 사진</div>
-                    <div class="md:w-1/2 h-64 md:h-auto relative">
-                        <img src="https://www.alva.com.hk/wp-content/uploads/deluxe-room.webp" onerror="this.src='https://via.placeholder.com/400x300?text=Alva+Hotel'" alt="Alva Hotel Room" class="w-full h-full object-cover">
-                    </div>
-                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                        <span class="text-sm text-gray-400 mb-1">HONG KONG</span>
-                        <h3 class="text-2xl font-bold mb-2">알바 바이 로얄 (ALVA)</h3>
-                        <p class="text-gray-600 text-sm mb-4">싱문 강변의 리버사이드 호텔. iPad로 제어하는 스마트 객실 시스템과 루프탑 인피니티 풀에서 여유로운 휴식을 선사합니다.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gastronomy -->
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-gray-800">현지 특식 가이드</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="food-card group aspect-[4/5]" onclick="openModal('food_dimsum')" data-aos="fade-up" data-aos-delay="200">
-                    <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <!-- 딤섬 이미지 교체 -->
-                    <img src="https://tse2.mm.bing.net/th/id/OIP.YCJRYSrjyohhulbV6zvNRQHaEc?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Dimsum'" alt="Dim Sum Steamer" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
-                        <h4 class="text-white text-xl font-bold">세레나데 딤섬</h4>
-                        <p class="text-gray-300 text-sm mt-2">홍콩 미식의 상징</p>
-                    </div>
-                </div>
-                <div class="food-card group aspect-[4/5]" onclick="openModal('food_macanese')" data-aos="fade-up" data-aos-delay="300">
-                    <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <!-- 매캐니즈 이미지 교체 -->
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.dQ0VUQTtv3ZhPOSLeuo_JAHaE7?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Macanese'" alt="Macanese Egg Tart" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
-                        <h4 class="text-white text-xl font-bold">매캐니즈 요리</h4>
-                        <p class="text-gray-300 text-sm mt-2">포르투갈+광동 퓨전</p>
-                    </div>
-                </div>
-                <div class="food-card group aspect-[4/5]" onclick="openModal('food_hotpot')" data-aos="fade-up" data-aos-delay="400">
-                    <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <!-- 훠궈 이미지 교체 -->
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.OY5dz4bnHTmvog6w_nbL4gHaFj?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Hotpot'" alt="Shabu Hotpot" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
-                        <h4 class="text-white text-xl font-bold">현지식 샤브샤브</h4>
-                        <p class="text-gray-300 text-sm mt-2">든든한 보양식</p>
-                    </div>
-                </div>
-                <div class="food-card group aspect-[4/5]" onclick="openModal('food_noodle')" data-aos="fade-up" data-aos-delay="500">
-                    <div class="touch-hint"><i class="fas fa-hand-pointer mr-1"></i>상세</div>
-                    <!-- 굴국수 이미지 교체 -->
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.2oYAwjot7D_StWVOOzbLjwHaE8?w=474&h=474&c=7&p=0" onerror="this.src='https://via.placeholder.com/300x400?text=Noodle'" alt="Noodle Lift" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
-                        <h4 class="text-white text-xl font-bold">굴국수 & 윙</h4>
-                        <p class="text-gray-300 text-sm mt-2">현지 별미</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-white text-gray-600 py-10 border-t border-gray-200">
-        <div class="container mx-auto px-6 text-center md:text-left">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <!-- 투어메이커 로고 -->
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" alt="투어메이커 Logo" class="h-10 md:h-12 object-contain mb-4 logo-blend">
-                    <p class="text-xs text-gray-500">(주)투어메이커 | 담당자: 김효돈</p>
-                </div>
-                <div class="text-xs text-center md:text-right text-gray-500">
-                    <p class="mb-2">* 상기 일정 및 식사는 현지 사정(천재지변, 교통상황 등)에 의해 다소 변경될 수 있습니다.</p>
-                    <p>&copy; 2026 TourMaker. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal Structure -->
+    <!-- 모달 관련 스크립트 -->
     <div id="detailModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl z-10 overflow-hidden transform transition-all scale-95 opacity-0 modal-container" id="modalContentWrapper">
             <div class="relative">
-                <img id="modalImg" src="" alt="Detail" class="w-full h-64 md:h-96 object-cover" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'">
+                <img id="modalImg" src="" alt="Detail" class="w-full h-56 md:h-80 object-cover" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'">
                 <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/80 transition z-20">
                     <i class="fas fa-times"></i>
                 </button>
@@ -625,11 +813,7 @@
                 <h3 id="modalTitle" class="text-2xl font-bold mb-3 text-gray-900"></h3>
                 <div class="w-12 h-1 bg-red-500 mb-4"></div>
                 <p id="modalDesc" class="text-gray-600 leading-relaxed whitespace-pre-line"></p>
-                
-                <!-- Youtube Video Container -->
-                <div id="videoContainer" class="video-wrapper">
-                    <!-- Iframe will be injected here -->
-                </div>
+                <div id="videoContainer" class="video-wrapper"></div>
             </div>
         </div>
     </div>
@@ -639,150 +823,81 @@
     <script>
         AOS.init({ once: true, offset: 50, duration: 800 });
 
-        // Data for Modals with OFFICIAL TOURISM BOARD VIDEOS
-        // 홍콩/마카오 관광청 공식 영상 및 4K 고화질 영상 큐레이션
-        // Updated with ALL images from user & Removed faulty videos
+        // --- D-Day 로직 ---
+        function updateDday() {
+            const targetDate = new Date('2026-03-08T00:00:00+09:00');
+            const now = new Date();
+            const diffTime = targetDate - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            let text = "";
+            if (diffDays > 0) text = `출발까지 D-${diffDays}`;
+            else if (diffDays === 0) text = "오늘 출발합니다!";
+            else text = "즐거운 여행 되셨나요?";
+
+            document.getElementById('main-dday').innerText = text;
+            document.getElementById('nav-dday').innerText = text;
+        }
+        updateDday();
+        setInterval(updateDday, 1000 * 60 * 60);
+
+        // --- 체크리스트 & 메모장 LocalStorage 로직 ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const memoInput = document.getElementById('userMemo');
+            if (memoInput) {
+                memoInput.value = localStorage.getItem('hk_macau_memo_2026') || '';
+                memoInput.addEventListener('input', (e) => {
+                    localStorage.setItem('hk_macau_memo_2026', e.target.value);
+                });
+            }
+
+            const checkboxes = document.querySelectorAll('.checklist-cb');
+            checkboxes.forEach(cb => {
+                const savedState = localStorage.getItem('hk_macau_chk_' + cb.id);
+                if (savedState === 'true') cb.checked = true;
+                
+                cb.addEventListener('change', (e) => {
+                    localStorage.setItem('hk_macau_chk_' + e.target.id, e.target.checked);
+                });
+            });
+        });
+
+        // --- 모달 데이터 및 로직 ---
         const modalData = {
             'star_avenue': {
-                title: '스타의 거리 (Avenue of Stars)',
-                img: 'https://viaggiatore.net/wp-content/uploads/2019/01/Statue-of-Bruce-Lee-at-Avenue-of-Stars-n-Hong-Kong-.jpg', 
-                desc: '홍콩의 스카이라인을 가장 아름답게 감상할 수 있는 해안 산책로입니다. 이소룡 동상과 홍콩 영화 스타들의 핸드프린팅을 찾아보며 빅토리아 항구의 낭만을 만끽할 수 있는 명소입니다.\n\n[추천 영상: 홍콩관광청 공식 - 360 Hong Kong Moments]',
-                videoId: 'Qf5Uu_dwqos', 
-                thumb: 'https://img.youtube.com/vi/Qf5Uu_dwqos/hqdefault.jpg'
-            },
-            'heritage1881': {
-                title: '1881 헤리티지 (1881 Heritage)',
-                img: 'https://i.ytimg.com/vi/UV9G66CM1rE/maxresdefault.jpg', 
-                desc: '1880년대부터 홍콩 해경 본부로 사용되던 빅토리아 양식의 건물을 리모델링한 쇼핑 및 문화 복합 공간입니다. 고풍스러운 건축물과 명품 매장이 어우러져 낮과 밤 모두 우아한 분위기를 자아냅니다.\n\n[추천 영상: 360° VR 체험]',
-                videoId: 'bRJ0W2qXctk', 
-                thumb: 'https://img.youtube.com/vi/bRJ0W2qXctk/hqdefault.jpg'
-            },
-            'west_kowloon': {
-                title: '서구룡 문화지구 (West Kowloon)',
-                img: 'https://tse3.mm.bing.net/th/id/OIP.6c1Q3jcNVlOlv2JSuDs1DwHaEE?w=474&h=474&c=7&p=0',
-                desc: '홍콩의 새로운 문화 예술 중심지로, 빅토리아 하버를 배경으로 펼쳐진 녹지 공간입니다. 현대적인 건축미를 자랑하는 M+ 뮤지엄의 외관과 아트 파빌리온은 ‘인스타그래머블’한 사진 명소로 유명합니다.\n\n[추천 영상: 서구룡 문화지구 공식 소개]',
-                videoId: 'V_rwF8MR1XE', 
-                thumb: 'https://img.youtube.com/vi/V_rwF8MR1XE/hqdefault.jpg'
+                title: '1881 헤리티지 & 스타의 거리',
+                img: 'https://viaggiatore.net/wp-content/uploads/2019/01/Statue-of-Bruce-Lee-at-Avenue-of-Stars-n-Hong-Kong-.jpg',
+                desc: '빅토리아풍 건축물인 1881 헤리티지와 홍콩 스카이라인이 펼쳐지는 스타의 거리 산책.'
             },
             'soho': {
                 title: '소호 거리 & 미드레벨 에스컬레이터',
                 img: 'https://tse4.mm.bing.net/th/id/OIP.al81Ubuu2yn3kPRu6k0rkQHaE7?w=474&h=474&c=7&p=0',
-                desc: '영화 "중경삼림"의 배경이 된 세계에서 가장 긴 야외 에스컬레이터입니다. 앤티크 숍과 트렌디한 바, 벽화가 어우러진 이국적인 거리를 편안하게 이동하며 감상할 수 있습니다.',
-                videoId: 'Qf5Uu_dwqos', // Using General HK skyline video as fallback/context
-                thumb: 'https://img.youtube.com/vi/Qf5Uu_dwqos/hqdefault.jpg'
+                desc: '영화 "중경삼림"의 배경이 된 세계 최장 야외 에스컬레이터. 앤티크 숍과 이국적인 거리를 감상합니다.'
             },
             'peak': {
                 title: '빅토리아 피크 (피크트램)',
                 img: 'https://tse1.mm.bing.net/th/id/OIP.1cyAgN1WjKMxzQ7sy8v0fgHaE8?w=474&h=474&c=7&p=0', 
-                desc: '홍콩 여행의 하이라이트로 꼽히는 최고의 전망대입니다. 45도가 넘는 급경사를 오르는 피크트램을 타고 정상에 오르면, 숲과 고층 빌딩, 바다가 어우러진 홍콩의 100만 불짜리 전경이 발아래 펼쳐집니다.\n\n[추천 영상: 3 Ways to Enjoy The Peak]',
-                videoId: 'wn-3rVQFOak', 
-                thumb: 'https://img.youtube.com/vi/wn-3rVQFOak/hqdefault.jpg'
+                desc: '급경사를 오르는 피크트램에 탑승하여 정상에서 백만불짜리 스카이라인 야경을 조망합니다.'
             },
             'hk_night': {
                 title: '홍콩 나이트 투어',
                 img: 'https://tse1.mm.bing.net/th/id/OIP.cMuLC8PWh5vhtkMKRU5HDwHaE8?w=474&h=474&c=7&p=0', 
-                desc: '홍콩의 밤을 즐기는 완벽한 방법입니다. 유서 깊은 교통수단인 스타페리와 오픈탑 2층 버스를 타고 화려한 도시의 불빛을 가로지른 뒤, 활기 넘치는 몽콕 야시장에서 현지의 생동감을 체험합니다.',
-                videoId: 'Qf5Uu_dwqos', 
-                thumb: 'https://img.youtube.com/vi/Qf5Uu_dwqos/hqdefault.jpg'
+                desc: '스타페리 바다 횡단, 2층 오픈탑 버스 도심 질주, 현지의 열기를 느끼는 몽콕 야시장 체험 코스입니다.'
             },
             'wongtaisin': {
-                title: '웡타이신 사원 (Wong Tai Sin Temple)',
+                title: '웡타이신 사원',
                 img: 'https://tse1.mm.bing.net/th/id/OIP._R7m9FwI6mrP_a0rVEiQLAHaD4?w=474&h=474&c=7&p=0',
-                desc: '"모든 소원을 들어준다"는 전설을 가진 홍콩 최대의 도교 사원입니다. 화려한 색채의 건축물과 향 내음 가득한 경건한 분위기 속에서 홍콩 사람들의 신앙 문화를 엿볼 수 있습니다.\n\n[추천 영상: Hong Kong\'s Hottest Religious Site]',
-                videoId: '1_OrtMyyw8c', 
-                thumb: 'https://img.youtube.com/vi/1_OrtMyyw8c/hqdefault.jpg'
-            },
-            'bridge': {
-                title: '강주아오 대교 (HZMB)',
-                img: 'https://tse2.mm.bing.net/th/id/OIP.KTxK5_FjgxqYr8aIDm-1sQHaDP?w=474&h=474&c=7&p=0',
-                desc: '세계 최장 약 55km 규모의 해상 대교·해저터널 복합 구간으로, 홍콩–주하이–마카오를 일직선으로 잇는 웅장한 프로젝트입니다.\n3개의 장대교, 인공섬, 6.7km 해저터널로 구성되어 있으며, 차량으로 약 30~40분 만에 바다를 횡단하며 "광둥–홍콩–마카오 대만주권 시대"의 상징적인 풍경을 감상할 수 있습니다.\n\n[추천 영상: Crossing the World’s Longest Sea Bridge]',
-                videoId: 'IOrhetZlAic', 
-                thumb: 'https://img.youtube.com/vi/IOrhetZlAic/hqdefault.jpg'
+                desc: '모든 소원을 들어준다는 전설이 있는 홍콩 최대의 도교 사원에서 소원을 빌어보세요.'
             },
             'st_paul': {
                 title: '성 바오로 성당 유적 & 세나도 광장',
                 img: 'https://www.chinatoptrip.com/wp-content/uploads/2018/11/ruins-of-st-pauls-macau-china-1.jpg',
-                desc: '원래는 17세기 예수회가 세운 ‘마테 데이 교회’와 성 바오로 대학 건물로, 1835년 화재 이후 지금의 석조 파사드와 긴 계단만 남아 있는 유적입니다. 동양적 문양과 서양식 조각이 공존해 ‘동서 문화 융합’의 상징으로 불립니다.\n이어지는 세나도 광장은 물결무늬 흑백 자갈 포장이 유명한 마카오의 중심 광장으로, 유럽풍 건물과 어우러진 이국적인 풍경을 자랑합니다.\n\n[추천 영상: Explore On Your Own in Macao – St. Paul’s]',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
+                desc: '마카오의 상징인 성 바오로 성당과 몬테요새, 물결무늬 바닥이 인상적인 유럽풍 세나도 광장 탐방.'
             },
             'cotai_night': {
-                title: '코타이 야경 (런더러 & 파리지앵)',
+                title: '마카오 나이트 투어',
                 img: 'https://tse3.mm.bing.net/th/id/OIP.4B6kUae4swu78CNyCXOafgHaE8?w=474&h=474&c=7&p=0',
-                desc: '‘동양의 라스베이거스’라 불리는 코타이 스트립의 화려한 야경을 감상합니다. \n실제 에펠탑의 약 1/2 규모인 파리지앵 마카오의 에펠탑 조명 쇼와, 런던 국회의사당 및 빅벤을 모티브로 한 런더러 마카오의 웅장한 외관이 어우러져 황홀한 포토 스팟을 제공합니다.',
-                // Video removed per user request
-            },
-            'coloane': {
-                title: '콜로안 빌리지 (성 자비에르 성당)',
-                img: 'https://macaulifestyle.com/wp-content/uploads/2020/02/St-Francis-Xavier-Church-Wide-Exterior-Coloane-Village-Macau-Lifestyle.jpg',
-                desc: '마카오 남단의 조용한 어촌 마을로, 화려한 도심과는 다른 로컬 감성을 느낄 수 있습니다. 중심 광장의 성 자비에르 성당과 파스텔톤 건물들이 이국적인 분위기를 자아내며, 인근의 원조 에그타르트(로드스토우) 본점에서 달콤한 휴식을 즐길 수 있습니다.',
-                // Video removed per user request
-            },
-            'taipa': {
-                title: '타이파 빌리지 & 주택 박물관',
-                img: 'https://www.taipavillagemacau.com/wp-content/uploads/2016/03/Taipa_Houses_Museum.jpg',
-                desc: '민트색 외벽의 포르투갈 스타일 주택들이 늘어선 동화 같은 거리입니다. 1920년대 포르투갈 관리들의 관사를 복원한 주택박물관은 호수와 정원을 배경으로 아름다운 풍경을 자랑하며, 타이파 빌리지의 아기자기한 골목과 카페거리는 산책하기 좋습니다.',
-                // Video removed per user request
-            },
-            'galaxy': {
-                title: '갤럭시 다이아몬드 쇼',
-                img: 'https://tse2.mm.bing.net/th/id/OIP.4wohTzAJ2HEHUJIiUeD4ngHaEK?w=474&h=474&c=7&p=0',
-                desc: '갤럭시 마카오 리조트 로비에서 펼쳐지는 압도적인 스케일의 무료 멀티미디어 쇼입니다. 웅장한 음악과 조명, 분수 사이에서 거대한 다이아몬드 조형물이 물 위로 솟아오르는 환상적인 퍼포먼스를 감상할 수 있습니다.\n\n[추천 영상: Galaxy Macau Diamond Show]',
-                videoId: 'b1oWL8tD0BE', 
-                thumb: 'https://img.youtube.com/vi/b1oWL8tD0BE/hqdefault.jpg'
-            },
-            'macau_tower': {
-                title: '마카오 타워',
-                img: 'https://tse3.mm.bing.net/th/id/OIP.WrZZE8XmTEHpFTPAAX042QHaLH?w=474&h=474&c=7&p=0',
-                desc: '높이 338m의 마카오 랜드마크로, 전망대에서는 마카오 반도와 코타이 스트립을 360도 파노라마로 조망할 수 있습니다. 스릴 넘치는 스카이워크나 번지점프를 구경하는 재미도 있으며, 특히 야경 시간대에는 도시 전체의 불빛을 한눈에 담을 수 있습니다.',
-                // Video removed per user request
-            },
-            'venetian': {
-                title: '베네시안 곤돌라 & 윈 분수쇼',
-                img: 'https://tse3.mm.bing.net/th/id/OIP.AYPM0ld1Knpmu-ttoMnsmAHaGk?w=474&h=474&c=7&p=0',
-                desc: '이탈리아 베네치아를 그대로 옮겨온 듯한 베네시안 호텔의 인공 운하에서 낭만적인 곤돌라를 구경하고, 인근 윈 팰리스(또는 윈 마카오)의 대형 인공 호수에서 펼쳐지는 화려한 음악 분수쇼(Performance Lake)를 감상하며 마카오의 밤을 만끽합니다.',
-                // Video removed per user request
-            },
-            'ama': {
-                title: '아마 사원 (A-Ma Temple)',
-                img: 'https://tse1.mm.bing.net/th/id/OIP.lO8Y5aSapF1OoRFzYqn5KwHaFE?w=474&h=474&c=7&p=0',
-                desc: '마카오에서 가장 오래된 도교 사원으로, 바다의 여신 ‘마조’를 모시는 곳입니다. ‘마카오’라는 지명의 유래가 된 유서 깊은 곳으로, 향 연기가 피어오르는 경건한 분위기 속에서 마카오의 뿌리와 정체성을 느낄 수 있습니다.\n\n[추천 영상: A-Ma Temple World Heritage]',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
-            },
-            'hotel_hk': {
-                title: '알바 호텔 바이 로얄 (ALVA HOTEL BY ROYAL)',
-                img: 'https://www.alva.com.hk/wp-content/uploads/deluxe-room.webp',
-                desc: '홍콩 샤틴 싱문강(Shing Mun River) 변에 위치한 리버사이드 라이프스타일 호텔입니다. \n\n**Key Point:**\n- **스마트 홈 시스템:** 전 객실에 비치된 iPad로 조명, 온도, TV 등을 제어하는 최첨단 경험.\n- **루프탑 인피니티 풀:** 탁 트인 시티뷰와 함께하는 여유로운 수영.\n- **위치:** 도심과 자연이 공존하는 샤틴 지역, MTR 및 셔틀로 편리한 접근성.',
-                videoId: 'qK45oCw--4I', 
-                thumb: 'https://img.youtube.com/vi/qK45oCw--4I/hqdefault.jpg'
-            },
-            'hotel_macau': {
-                title: '크라운 플라자 마카오 (Crowne Plaza Macau)',
-                img: 'https://digital.ihg.com/is/image/ihg/crowne-plaza-macau-4892329475-2x1',
-                desc: '마카오 반도 북쪽 해안가, 홍콩-주하이-마카오 대교 인근에 위치한 5성급 호텔입니다.\n\n**Key Point:**\n- **파노라마 오션뷰:** 객실 통유리창을 통해 펼쳐지는 남중국해의 시원한 전망.\n- **비즈니스 & 레저:** 실내 수영장, 피트니스 센터 및 대규모 MICE 시설 완비.\n- **품격 있는 객실:** 연한 톤의 모던한 인테리어와 최신식 어메니티 제공.',
-                videoId: 'dXP4DUOjp-w', 
-                thumb: 'https://img.youtube.com/vi/dXP4DUOjp-w/hqdefault.jpg'
-            },
-            'food_dimsum': {
-                title: '세레나데 딤섬 (Serenade Dim Sum)',
-                img: 'https://tse2.mm.bing.net/th/id/OIP.YCJRYSrjyohhulbV6zvNRQHaEc?w=474&h=474&c=7&p=0',
-                desc: '침사추이 홍콩문화센터에 위치하여 빅토리아 하버의 절경을 감상하며 식사할 수 있는 명소입니다.\n\n**대표 메뉴:**\n- **하가우:** 얇은 피 속에 탱글한 새우가 가득한 딤섬.\n- **시우마이:** 돼지고기와 새우가 어우러진 오픈형 딤섬.\n- **차슈바오:** 달콤한 바비큐 돼지고기가 들어간 찐빵.\n대나무 찜통에서 피어오르는 따뜻한 김과 함께 광둥 미식의 진수를 경험하세요.'
-            },
-            'food_macanese': {
-                title: '매캐니즈 요리 (Macanese Cuisine)',
-                img: 'https://tse3.mm.bing.net/th/id/OIP.dQ0VUQTtv3ZhPOSLeuo_JAHaE7?w=474&h=474&c=7&p=0',
-                desc: '포르투갈의 항해 역사와 광동의 식문화가 만나 탄생한 세계 최초의 퓨전 요리입니다. 향신료와 코코넛 밀크, 간장 소스의 조화가 일품입니다.\n\n**대표 메뉴:**\n- **아프리칸 치킨:** 매콤한 향신료와 코코넛 소스로 구운 치킨.\n- **민치(Minchi):** 다진 고기와 감자를 볶아낸 마카오 가정식.\n- **에그타르트:** 바삭한 페이스트리와 부드러운 커스터드 크림의 조화.'
-            },
-            'food_hotpot': {
-                title: '현지식 훠궈 (Hotpot)',
-                img: 'https://tse1.mm.bing.net/th/id/OIP.OY5dz4bnHTmvog6w_nbL4gHaFj?w=474&h=474&c=7&p=0',
-                desc: '신선한 재료를 육수에 살짝 데쳐 먹는 핫팟은 홍콩과 마카오에서 사랑받는 미식 문화입니다.\n\n**즐기는 법:**\n- **육수 선택:** 맑은 육수부터 매콤한 마라 육수까지 취향대로.\n- **재료:** 최상급 소고기 슬라이스, 신선한 해산물, 다양한 버섯과 야채.\n- **소스:** 참깨, 폰즈, 마늘 등 나만의 디핑 소스 만들기.\n따뜻한 국물과 풍성한 재료로 여행의 피로를 풀어보세요.'
-            },
-            'food_noodle': {
-                title: '굴국수 & 윙 (Oyster Sauce Noodle)',
-                img: 'https://tse3.mm.bing.net/th/id/OIP.2oYAwjot7D_StWVOOzbLjwHaE8?w=474&h=474&c=7&p=0',
-                desc: '현지인들이 즐겨 찾는 로컬 소울 푸드입니다. 감칠맛 나는 굴소스와 쫄깃한 면발의 조화가 일품입니다.\n\n**특징:**\n- **굴소스 비빔면:** 진한 굴소스에 볶아낸 면 요리로 남녀노소 누구나 좋아하는 맛.\n- **완탕면:** 맑은 육수에 새우 완탕이 들어간 깔끔한 국물 요리.\n- **닭날개 튀김:** 바삭하고 짭조름하여 국수와 찰떡궁합을 자랑하는 사이드 메뉴.'
+                desc: '윈호텔의 웅장한 분수쇼, 파리지앵 호텔의 에펠탑 야경, 런더러의 빅벤 조명이 어우러진 화려한 밤.'
             }
         };
 
@@ -790,27 +905,21 @@
             const data = modalData[id];
             if (!data) return;
             
-            // 1. 이미지 및 텍스트 설정
             document.getElementById('modalImg').src = data.img;
             document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalDesc').innerHTML = data.desc.replace(/\n/g, '<br>'); // 줄바꿈 처리
+            document.getElementById('modalDesc').innerHTML = data.desc.replace(/\n/g, '<br>');
             
-            // 2. 비디오 처리 로직
             const videoContainer = document.getElementById('videoContainer');
-            videoContainer.innerHTML = ''; // 초기화
+            videoContainer.innerHTML = ''; 
 
             if (data.videoId) {
-                // 썸네일과 재생 버튼을 포함한 div 생성
                 const thumbnailDiv = document.createElement('div');
                 thumbnailDiv.className = 'video-thumbnail';
-                // Use YouTube HQ thumbnail
                 thumbnailDiv.style.backgroundImage = `url('https://img.youtube.com/vi/${data.videoId}/hqdefault.jpg')`;
-                thumbnailDiv.style.backgroundColor = '#000';
                 thumbnailDiv.innerHTML = '<div class="play-button"></div>';
                 
                 thumbnailDiv.onclick = function() {
                     const iframe = document.createElement('iframe');
-                    // 공식 영상 연동 (Autoplay, Mute, Rel=0)
                     iframe.setAttribute('src', `https://www.youtube.com/embed/${data.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`);
                     iframe.setAttribute('frameborder', '0');
                     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
@@ -825,7 +934,6 @@
                 videoContainer.style.display = 'none';
             }
             
-            // 3. 모달 애니메이션
             const modal = document.getElementById('detailModal');
             const content = document.getElementById('modalContentWrapper');
             
@@ -846,7 +954,7 @@
             
             setTimeout(() => {
                 modal.classList.add('hidden');
-                videoContainer.innerHTML = ''; // 닫을 때 영상 제거
+                videoContainer.innerHTML = ''; 
             }, 300);
         }
 
