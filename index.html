@@ -66,6 +66,14 @@
             content: ''; position: absolute; bottom: -10px; left: 0; width: 40px; height: 3px; background-color: #ef4444;
         }
         
+        /* 타임라인 디자인 (가독성 강화) */
+        .timeline-line {
+            position: absolute; left: 15px; top: 10px; bottom: 0; width: 2px; background-color: #e2e8f0; z-index: 0;
+        }
+        .timeline-dot {
+            position: absolute; left: -6px; top: 4px; width: 14px; height: 14px; border-radius: 50%; z-index: 10;
+        }
+
         /* Modal */
         .modal-container { transition: all 0.3s ease-in-out; }
         .video-wrapper {
@@ -348,9 +356,9 @@
                     <h2 class="text-2xl md:text-3xl font-black text-gray-900 flex items-center">
                         <i class="fas fa-map-marked-alt mr-3 text-blue-800"></i> 상세 일정 가이드
                     </h2>
-                    <!-- GitHub 오류를 방지하기 위해 type="button" 명시 및 triggerPrint() 함수 호출 -->
+                    <!-- 버튼 텍스트 수정 및 인앱 브라우저 체크 우회 함수 연동 -->
                     <button type="button" onclick="triggerPrint()" class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-colors flex items-center text-sm">
-                        <i class="fas fa-print mr-2 text-lg"></i> A4 일정표 인쇄하기
+                        <i class="fas fa-print mr-2 text-lg"></i> 일정표인쇄하기
                     </button>
                 </div>
 
@@ -810,11 +818,19 @@
 
         // GitHub 연동 및 각종 환경에서 오류 없이 강제 프린트 호출 함수
         function triggerPrint() {
+            // 카카오톡 등 인앱 브라우저 체크
+            var userAgent = navigator.userAgent.toLowerCase();
+            if(userAgent.indexOf('kakaotalk') > -1) {
+                alert('카카오톡 내부 브라우저에서는 인쇄 기능이 제한되어 있습니다.\n화면 우측 하단 (또는 상단)의 메뉴(⋮)를 눌러 [다른 브라우저로 열기(크롬/사파리)]를 선택하신 후 다시 인쇄를 눌러주세요.');
+                return;
+            }
+            
             try {
-                window.print();
+                // 비동기로 호출하여 브라우저 렌더링 블락 방지
+                setTimeout(function() { window.print(); }, 200);
             } catch (e) {
-                console.error("Print function is not supported in this environment.", e);
-                alert("인쇄 기능을 지원하지 않는 환경입니다. 브라우저의 메뉴에서 '인쇄'를 선택해주세요.");
+                console.error("Print function error:", e);
+                alert("인쇄 기능을 지원하지 않는 환경입니다. 브라우저의 메뉴에서 '인쇄'를 직접 선택해주세요.");
             }
         }
 
