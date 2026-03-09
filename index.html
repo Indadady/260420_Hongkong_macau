@@ -180,7 +180,6 @@
                     <a href="#prep" class="hover:text-red-500 transition">여행준비</a>
                     <a href="#itinerary" class="hover:text-red-500 transition">상세일정</a>
                     <a href="#videos" class="hover:text-red-500 transition">홍보영상</a>
-                    <!-- 네비게이션바 인쇄 버튼 삭제됨 (중복 방지) -->
                     <a href="tel:010-5115-6118" class="px-4 py-2 bg-[#006494] text-white rounded-full hover:bg-blue-800 transition shadow-md flex items-center gap-2">
                         <i class="fas fa-phone-alt"></i> 담당자 직통
                     </a>
@@ -208,7 +207,7 @@
         <!-- Hero Section -->
         <header class="hero-bg h-screen flex flex-col items-center justify-center text-center px-4 relative pt-10">
             <!-- D-Day Badge -->
-            <div id="main-dday" class="d-day-badge absolute top-28 bg-red-600 text-white font-black text-xl md:text-2xl px-6 py-2 rounded-full shadow-2xl z-20">
+            <div id="main-dday" class="d-day-badge absolute top-28 bg-red-600 text-white font-black text-xl md:text-2xl px-6 py-2 rounded-full shadow-2xl z-20 transition-all">
                 D-DAY 계산중...
             </div>
 
@@ -358,7 +357,7 @@
                     </h2>
                     <!-- 버튼 텍스트 수정 및 인앱 브라우저 체크 우회 함수 연동 -->
                     <button type="button" onclick="triggerPrint()" class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-colors flex items-center text-sm">
-                        <i class="fas fa-print mr-2 text-lg"></i> 일정표인쇄하기
+                        <i class="fas fa-print mr-2 text-lg"></i> 일정표 인쇄하기
                     </button>
                 </div>
 
@@ -408,7 +407,7 @@
                         </li>
                     </ul>
                     
-                    <!-- 식사/호텔 요약 (달러 금액 삭제) -->
+                    <!-- 식사/호텔 요약 -->
                     <div class="bg-gray-50 p-4 rounded-lg flex flex-col md:flex-row gap-4 border border-gray-200 text-sm font-medium mt-4">
                         <div class="flex items-center text-orange-700"><i class="fas fa-utensils mr-2"></i> 중: 한식 / 석: 광동식</div>
                         <div class="flex items-center text-indigo-700 md:border-l md:border-gray-300 md:pl-4"><i class="fas fa-bed mr-2"></i> 도르셋 쿤통 호텔 (Dorsett Kwun Tong)</div>
@@ -834,21 +833,52 @@
             }
         }
 
-        // --- D-Day 로직 ---
+        // --- D-Day 로직 (개선된 버전) ---
         function updateDday() {
-            const targetDate = new Date('2026-03-08T00:00:00+09:00');
+            // 한국 표준시(KST) 기준으로 날짜 계산 (해외 로밍/현지 유심 사용 시 시차로 인한 날짜 오류 방지)
             const now = new Date();
-            const diffTime = targetDate - now;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
+            const kstTime = new Date(utc + (9 * 60 * 60 * 1000));
+            
+            // 시간 단위를 제외하고 정확한 '일(Day)' 계산을 위해 자정 기준으로 초기화
+            const today = new Date(kstTime.getFullYear(), kstTime.getMonth(), kstTime.getDate());
+            
+            // 여행 시작일과 종료일 세팅 (자바스크립트에서 월(Month)은 0부터 시작하므로 3월은 '2'로 세팅)
+            const startDate = new Date(2026, 2, 8);  // 2026-03-08
+            const endDate = new Date(2026, 2, 12);   // 2026-03-12
+            
+            // 두 날짜 간의 일수(Day) 차이 계산
+            const diffToStart = Math.round((startDate - today) / (1000 * 60 * 60 * 24));
+            const diffFromStart = Math.round((today - startDate) / (1000 * 60 * 60 * 24));
             
             let text = "";
-            if (diffDays > 0) text = `출발까지 D-${diffDays}`;
-            else if (diffDays === 0) text = "오늘 출발합니다!";
-            else text = "즐거운 여행 되셨나요?";
+            
+            // 상태별 멘트 분기
+            if (diffToStart > 0) {
+                text = `출발까지 D-${diffToStart}`;
+            } else if (diffToStart === 0) {
+                text = "오늘 출발합니다! (여행 1일차)";
+            } else if (today <= endDate) {
+                const tripDay = diffFromStart + 1; // 2일차, 3일차 등 계산
+                text = `여행 ${tripDay}일차입니다.`;
+            } else {
+                text = "즐거운 여행이 되셨습니까? 아름다운 추억으로 간직되길 바랍니다.";
+                
+                // 안내 멘트가 길어질 경우 메인 화면 뱃지의 폰트 크기 및 패딩 미세 조정
+                const mainBadge = document.getElementById('main-dday');
+                if(mainBadge) {
+                    mainBadge.classList.remove('text-xl', 'md:text-2xl');
+                    mainBadge.classList.add('text-sm', 'md:text-base');
+                    mainBadge.style.padding = "0.75rem 1.5rem";
+                }
+            }
 
-            document.getElementById('main-dday').innerText = text;
-            document.getElementById('nav-dday').innerText = text;
+            // HTML 요소에 텍스트 반영
+            if(document.getElementById('main-dday')) document.getElementById('main-dday').innerText = text;
+            if(document.getElementById('nav-dday')) document.getElementById('nav-dday').innerText = text;
         }
+        
+        // 페이지 로드 시 즉시 실행 및 1시간 단위로 갱신
         updateDday();
         setInterval(updateDday, 1000 * 60 * 60);
 
